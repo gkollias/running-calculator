@@ -16,15 +16,23 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-5RRK53R703');
     </script> 
+    
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "YOUR_CLARITY_ID");
+    </script>
 
     <!-- Adsense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3736890362318036"
      crossorigin="anonymous"></script>
 
-      <!-- Vercel Analytics -->
+    <!-- Vercel Analytics -->
     <script defer src="/_vercel/insights/script.js"></script>
     
     <style>
@@ -62,6 +70,22 @@
         .header p {
             font-size: 1.1rem;
             opacity: 0.9;
+        }
+
+        /* Ad Styles */
+        .ad-container {
+            background: white;
+            border-radius: 15px;
+            padding: 10px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .ad-label {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 5px;
         }
 
         .calculators-grid {
@@ -240,6 +264,21 @@
             <p>Calculate VDOT, pace, splits, and optimize your training</p>
         </div>
 
+        <!-- Top Banner Ad -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- Display ad - 728x90 (Desktop) or 320x50 (Mobile) -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-3736890362318036"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
         <div class="calculators-grid">
             <!-- VDOT Calculator -->
             <div class="calculator-card">
@@ -386,11 +425,66 @@
                 <div id="calorie-result" class="result" style="display: none;"></div>
             </div>
         </div>
+
+        <!-- Bottom Ad -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-3736890362318036"
+                 data-ad-slot="0987654321"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        <!-- Recommended Running Gear -->
+        <!-- <div class="calculator-card" style="margin-top: 20px;">
+            <h2>🏃‍♀️ Recommended Running Gear</h2>
+            <p style="margin-bottom: 15px;">Check out these popular running essentials:</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <a href="https://www.amazon.com/dp/B08DG7Y5B5?tag=runningcalc-20" target="_blank" style="text-decoration: none; color: inherit;">
+                    <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; text-align: center; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+                        <div style="font-weight: 600; color: #667eea;">Garmin Forerunner Watch</div>
+                        <div style="font-size: 14px; color: #666; margin-top: 5px;">Track pace, distance & heart rate</div>
+                    </div>
+                </a>
+                <a href="https://www.amazon.com/s?k=running+shoes&tag=runningcalc-20" target="_blank" style="text-decoration: none; color: inherit;">
+                    <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; text-align: center; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+                        <div style="font-weight: 600; color: #667eea;">Running Shoes Guide</div>
+                        <div style="font-size: 14px; color: #666; margin-top: 5px;">Find your perfect running shoes</div>
+                    </div>
+                </a>
+                <a href="https://www.amazon.com/s?k=hydration+pack+running&tag=runningcalc-20" target="_blank" style="text-decoration: none; color: inherit;">
+                    <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; text-align: center; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+                        <div style="font-weight: 600; color: #667eea;">Hydration Gear</div>
+                        <div style="font-size: 14px; color: #666; margin-top: 5px;">Belts, bottles & vests</div>
+                    </div>
+                </a>
+            </div>
+            <p style="font-size: 12px; color: #999; margin-top: 15px; text-align: center;">As an Amazon Associate, we earn from qualifying purchases</p>
+        </div> -->
+        
+        <!-- Privacy Notice -->
+        <!-- <div style="text-align: center; padding: 20px; color: white; font-size: 14px;">
+            <p>By using this site, you agree to our use of cookies for analytics. 
+            <a href="#" style="color: white; text-decoration: underline;" onclick="alert('We use Google Analytics to understand how visitors use our site. No personal information is collected.');">Learn more</a></p>
+        </div> -->
     </div>
 
     <script>
         // VDOT calculation based on Jack Daniels' formula
         function calculateVDOT() {
+            // Track calculator usage
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'calculate', {
+                    'event_category': 'calculator',
+                    'event_label': 'vdot'
+                });
+            }
+            
             const distance = parseFloat(document.getElementById('vdot-distance').value);
             const minutes = parseInt(document.getElementById('vdot-minutes').value);
             const seconds = parseInt(document.getElementById('vdot-seconds').value);
@@ -412,6 +506,15 @@
             
             // Calculate VDOT
             const vdot = vo2 / percentMax;
+            
+            // Track VDOT value
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'calculator_complete', {
+                    'event_category': 'calculator',
+                    'event_label': 'vdot',
+                    'value': Math.round(vdot)
+                });
+            }
             
             // Calculate training paces based on VDOT
             const easyPace = calculatePaceFromVDOT(vdot, 0.59, 0.74);
@@ -479,6 +582,15 @@
         }
         
         function calculatePace() {
+            // Track calculator usage
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'calculate', {
+                    'event_category': 'calculator',
+                    'event_label': 'pace',
+                    'value': paceUnit
+                });
+            }
+            
             const distance = parseFloat(document.getElementById('pace-distance').value);
             const hours = parseInt(document.getElementById('pace-hours').value) || 0;
             const minutes = parseInt(document.getElementById('pace-minutes').value) || 0;
@@ -519,6 +631,14 @@
         
         // Split Calculator
         function calculateSplits() {
+            // Track calculator usage
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'calculate', {
+                    'event_category': 'calculator',
+                    'event_label': 'splits'
+                });
+            }
+            
             const paceMin = parseInt(document.getElementById('split-pace-min').value);
             const paceSec = parseInt(document.getElementById('split-pace-sec').value);
             const distance = parseFloat(document.getElementById('split-distance').value);
@@ -576,6 +696,14 @@
         
         // Heart Rate Zones Calculator
         function calculateHRZones() {
+            // Track calculator usage
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'calculate', {
+                    'event_category': 'calculator',
+                    'event_label': 'heart_rate_zones'
+                });
+            }
+            
             const maxHR = parseInt(document.getElementById('max-hr').value);
             const restHR = parseInt(document.getElementById('rest-hr').value) || 0;
             
@@ -617,6 +745,14 @@
         
         // Race Predictor
         function predictRaceTimes() {
+            // Track calculator usage
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'calculate', {
+                    'event_category': 'calculator',
+                    'event_label': 'race_predictor'
+                });
+            }
+            
             const knownDistance = parseFloat(document.getElementById('known-distance').value);
             const hours = parseInt(document.getElementById('known-hours').value) || 0;
             const minutes = parseInt(document.getElementById('known-minutes').value) || 0;
@@ -658,6 +794,14 @@
         
         // Calorie Calculator
         function calculateCalories() {
+            // Track calculator usage
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'calculate', {
+                    'event_category': 'calculator',
+                    'event_label': 'calories'
+                });
+            }
+            
             const weight = parseFloat(document.getElementById('weight').value);
             const distance = parseFloat(document.getElementById('cal-distance').value);
             const time = parseInt(document.getElementById('cal-time').value);
@@ -693,6 +837,164 @@
             document.getElementById('calorie-result').innerHTML = resultHTML;
             document.getElementById('calorie-result').style.display = 'block';
         }
+        
+        // Advanced Analytics Tracking
+        
+        // 1. Track scroll depth
+        let scrollDepths = [25, 50, 75, 90];
+        let scrolledDepths = [];
+        
+        function trackScrollDepth() {
+            const scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100;
+            
+            scrollDepths.forEach(depth => {
+                if (scrollPercent >= depth && !scrolledDepths.includes(depth)) {
+                    scrolledDepths.push(depth);
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'scroll', {
+                            'event_category': 'engagement',
+                            'event_label': 'depth',
+                            'value': depth
+                        });
+                    }
+                }
+            });
+        }
+        
+        // Debounce scroll tracking
+        let scrollTimer;
+        window.addEventListener('scroll', function() {
+            clearTimeout(scrollTimer);
+            scrollTimer = setTimeout(trackScrollDepth, 100);
+        });
+        
+        // 2. Track time on page
+        let startTime = Date.now();
+        window.addEventListener('beforeunload', function() {
+            const timeSpent = Math.round((Date.now() - startTime) / 1000);
+            if (typeof gtag !== 'undefined' && timeSpent > 0) {
+                gtag('event', 'time_on_page', {
+                    'event_category': 'engagement',
+                    'value': timeSpent
+                });
+            }
+        });
+        
+        // 3. Track outbound links (Amazon affiliates)
+        document.addEventListener('click', function(e) {
+            const target = e.target.closest('a');
+            if (target && target.href && target.href.includes('amazon.com')) {
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'click', {
+                        'event_category': 'outbound',
+                        'event_label': 'amazon_affiliate',
+                        'transport_type': 'beacon'
+                    });
+                }
+            }
+        });
+        
+        // 4. Track ad visibility
+        function trackAdVisibility() {
+            const ads = document.querySelectorAll('.adsbygoogle');
+            ads.forEach((ad, index) => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            if (typeof gtag !== 'undefined') {
+                                gtag('event', 'ad_impression', {
+                                    'event_category': 'monetization',
+                                    'event_label': `ad_position_${index + 1}`
+                                });
+                            }
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                observer.observe(ad);
+            });
+        }
+        
+        // Initialize ad tracking when ads load
+        window.addEventListener('load', trackAdVisibility);
+        
+        // 5. Track calculator errors
+        window.addEventListener('error', function(e) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'exception', {
+                    'description': e.message,
+                    'fatal': false
+                });
+            }
+        });
+        
+        // 6. Track form field interactions
+        let fieldInteractions = {};
+        document.querySelectorAll('input, select').forEach(field => {
+            field.addEventListener('focus', function() {
+                const fieldName = this.id || this.name;
+                if (!fieldInteractions[fieldName]) {
+                    fieldInteractions[fieldName] = true;
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'form_interaction', {
+                            'event_category': 'engagement',
+                            'event_label': fieldName
+                        });
+                    }
+                }
+            });
+        });
+        
+        // 7. UTM Parameter Tracking
+        function getUTMParameters() {
+            const params = new URLSearchParams(window.location.search);
+            const utmParams = {};
+            ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(param => {
+                if (params.has(param)) {
+                    utmParams[param] = params.get(param);
+                }
+            });
+            return utmParams;
+        }
+        
+        // Track UTM parameters if present
+        const utmParams = getUTMParameters();
+        if (Object.keys(utmParams).length > 0 && typeof gtag !== 'undefined') {
+            gtag('event', 'page_view', {
+                'event_category': 'traffic_source',
+                'event_label': JSON.stringify(utmParams)
+            });
+        }
+        
+        // 8. Device and browser info
+        function trackDeviceInfo() {
+            if (typeof gtag !== 'undefined') {
+                const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                const deviceType = isMobile ? 'mobile' : 'desktop';
+                
+                gtag('event', 'device_info', {
+                    'event_category': 'technical',
+                    'event_label': deviceType,
+                    'custom_dimension_1': window.screen.width + 'x' + window.screen.height
+                });
+            }
+        }
+        
+        trackDeviceInfo();
+        
+        // 9. Track page load performance
+        window.addEventListener('load', function() {
+            if (typeof gtag !== 'undefined' && window.performance) {
+                const perfData = window.performance.timing;
+                const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+                
+                gtag('event', 'timing_complete', {
+                    'name': 'load',
+                    'value': pageLoadTime,
+                    'event_category': 'performance'
+                });
+            }
+        });
     </script>
 </body>
 </html>
