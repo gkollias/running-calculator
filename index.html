@@ -13,20 +13,20 @@
     <!-- Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5RRK53R703"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-5RRK53R703');
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5RRK53R703');
     </script> 
     
     <!-- Microsoft Clarity -->
-    <!-- <script type="text/javascript">
+    <script type="text/javascript">
         (function(c,l,a,r,i,t,y){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
             t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "YOUR_CLARITY_ID");
-    </script> -->
+        })(window, document, "clarity", "script", "s4odkpivjz");
+    </script>
 
     <!-- Adsense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3736890362318036"
@@ -48,28 +48,107 @@
             min-height: 100vh;
             padding: 20px;
             color: #333;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="runner" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23runner)"/></svg>');
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .header {
             text-align: center;
             color: white;
             margin-bottom: 30px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .header h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* Animated runner emoji */
+        .runner-emoji {
+            display: inline-block;
+            animation: run 2s ease-in-out infinite;
+        }
+
+        @keyframes run {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(5px) rotate(-5deg); }
+            75% { transform: translateX(-5px) rotate(5deg); }
         }
 
         .header p {
             font-size: 1.1rem;
             opacity: 0.9;
+        }
+
+        /* Quick stats bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
         }
 
         /* Ad Styles */
@@ -80,6 +159,7 @@
             margin: 20px 0;
             text-align: center;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            animation: fadeIn 1s ease-out 0.5s both;
         }
 
         .ad-label {
@@ -100,8 +180,47 @@
             border-radius: 15px;
             padding: 25px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+            position: relative;
+            overflow: hidden;
         }
+
+        .calculator-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .calculator-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .calculator-card:nth-child(1) { animation-delay: 0.1s; }
+        .calculator-card:nth-child(2) { animation-delay: 0.2s; }
+        .calculator-card:nth-child(3) { animation-delay: 0.3s; }
+        .calculator-card:nth-child(4) { animation-delay: 0.4s; }
+        .calculator-card:nth-child(5) { animation-delay: 0.5s; }
+        .calculator-card:nth-child(6) { animation-delay: 0.6s; }
 
         .calculator-card:hover {
             transform: translateY(-5px);
@@ -114,6 +233,14 @@
             font-size: 1.5rem;
             border-bottom: 2px solid #eee;
             padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Icons for each calculator */
+        .calculator-card h2::before {
+            font-size: 1.2rem;
         }
 
         .input-group {
@@ -125,6 +252,7 @@
             margin-bottom: 5px;
             font-weight: 500;
             color: #555;
+            font-size: 0.9rem;
         }
 
         input[type="number"],
@@ -135,7 +263,8 @@
             border: 2px solid #e0e0e0;
             border-radius: 8px;
             font-size: 16px;
-            transition: border-color 0.3s ease;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
         }
 
         input[type="number"]:focus,
@@ -143,6 +272,8 @@
         select:focus {
             outline: none;
             border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
         }
 
         .input-row {
@@ -163,9 +294,29 @@
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: all 0.3s ease;
             width: 100%;
             margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        button:active::before {
+            width: 300px;
+            height: 300px;
         }
 
         button:hover {
@@ -183,6 +334,18 @@
             background: #f8f9fa;
             border-radius: 8px;
             border-left: 4px solid #667eea;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .result h3 {
@@ -193,6 +356,14 @@
         .result-item {
             margin-bottom: 8px;
             font-size: 15px;
+            padding: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        .result-item:hover {
+            background: rgba(102, 126, 234, 0.05);
+            padding-left: 10px;
+            border-radius: 4px;
         }
 
         .result-item strong {
@@ -203,20 +374,26 @@
             display: flex;
             justify-content: center;
             margin-bottom: 15px;
-            gap: 10px;
+            gap: 0;
+            background: #e0e0e0;
+            border-radius: 8px;
+            padding: 4px;
         }
 
         .unit-toggle button {
             width: auto;
             padding: 8px 20px;
             margin: 0;
-            background: #e0e0e0;
+            background: transparent;
             color: #333;
+            box-shadow: none;
         }
 
         .unit-toggle button.active {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            border-radius: 6px;
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
         }
 
         .pace-splits {
@@ -232,6 +409,13 @@
             border-radius: 8px;
             text-align: center;
             border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .pace-split:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
         }
 
         .pace-split-distance {
@@ -246,6 +430,47 @@
             color: #667eea;
         }
 
+        /* Floating action button */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: none;
+        }
+
+        .fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         @media (max-width: 768px) {
             .calculators-grid {
                 grid-template-columns: 1fr;
@@ -254,14 +479,46 @@
             .header h1 {
                 font-size: 2rem;
             }
+            
+            .stats-bar {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .fab {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🏃‍♂️ Advanced Running Calculator</h1>
+            <h1><span class="runner-emoji">🏃‍♂️</span> Advanced Running Calculator</h1>
             <p>Calculate VDOT, pace, splits, and optimize your training</p>
+        </div>
+
+        <!-- Stats bar -->
+        <div class="stats-bar" id="stats-bar" style="display: none;">
+            <div class="stat-card">
+                <div class="stat-value" id="calculations-count">0</div>
+                <div class="stat-label">Calculations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="current-pace">--:--</div>
+                <div class="stat-label">Last Pace</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="vdot-score">--</div>
+                <div class="stat-label">VDOT Score</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="calories-burned">0</div>
+                <div class="stat-label">Calories Est.</div>
+            </div>
         </div>
 
         <!-- Top Banner Ad -->
@@ -282,7 +539,7 @@
         <div class="calculators-grid">
             <!-- VDOT Calculator -->
             <div class="calculator-card">
-                <h2>VDOT Calculator</h2>
+                <h2>📊 VDOT Calculator</h2>
                 <div class="input-group">
                     <label for="vdot-distance">Race Distance</label>
                     <select id="vdot-distance">
@@ -311,7 +568,7 @@
 
             <!-- Pace Calculator -->
             <div class="calculator-card">
-                <h2>Pace Calculator</h2>
+                <h2>⏱️ Pace Calculator</h2>
                 <div class="unit-toggle">
                     <button class="active" onclick="togglePaceUnit('km')">Kilometers</button>
                     <button onclick="togglePaceUnit('mi')">Miles</button>
@@ -340,7 +597,7 @@
 
             <!-- Split Calculator -->
             <div class="calculator-card">
-                <h2>Split Calculator</h2>
+                <h2>📈 Split Calculator</h2>
                 <div class="input-group">
                     <label for="split-pace-min">Target Pace (min/km)</label>
                     <div class="input-row">
@@ -363,7 +620,7 @@
 
             <!-- Training Zones Calculator -->
             <div class="calculator-card">
-                <h2>Heart Rate Training Zones</h2>
+                <h2>❤️ Heart Rate Training Zones</h2>
                 <div class="input-group">
                     <label for="max-hr">Maximum Heart Rate</label>
                     <input type="number" id="max-hr" placeholder="Enter max HR or age" value="180">
@@ -378,7 +635,7 @@
 
             <!-- Race Predictor -->
             <div class="calculator-card">
-                <h2>Race Time Predictor</h2>
+                <h2>🏆 Race Time Predictor</h2>
                 <div class="input-group">
                     <label for="known-distance">Known Race Distance</label>
                     <select id="known-distance">
@@ -408,7 +665,7 @@
 
             <!-- Calorie Calculator -->
             <div class="calculator-card">
-                <h2>Running Calorie Calculator</h2>
+                <h2>🔥 Running Calorie Calculator</h2>
                 <div class="input-group">
                     <label for="weight">Weight (kg)</label>
                     <input type="number" id="weight" step="0.1" value="70">
@@ -466,6 +723,16 @@
             </div>
             <p style="font-size: 12px; color: #999; margin-top: 15px; text-align: center;">As an Amazon Associate, we earn from qualifying purchases</p>
         </div> -->
+        
+        <!-- Running Tips Section (moved to bottom) -->
+        <div class="calculator-card" style="margin-top: 20px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+            <h2 style="color: #333;">💡 Quick Running Tips</h2>
+            <div id="running-tip" style="font-size: 16px; line-height: 1.6; color: #444; margin: 15px 0;">
+                <p><strong>Tip:</strong> <span id="tip-text">For optimal performance, aim to do 80% of your training at an easy pace and 20% at higher intensities.</span></p>
+            </div>
+            <button onclick="getNewTip()" style="background: #667eea; width: auto; padding: 8px 20px;">Get New Tip</button>
+        </div>
+        
         
         <!-- Privacy Notice -->
         <!-- <div style="text-align: center; padding: 20px; color: white; font-size: 14px;">
