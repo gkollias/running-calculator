@@ -1262,6 +1262,88 @@
                 });
             }
         });
+
+        // Running tips array
+        const runningTips = [
+            "For optimal performance, aim to do 80% of your training at an easy pace and 20% at higher intensities.",
+            "Stay hydrated! Drink 16-24 oz of water 2-3 hours before running, and 6-8 oz every 20 minutes during long runs.",
+            "Replace your running shoes every 300-500 miles to prevent injuries and maintain proper support.",
+            "Include dynamic stretching before runs and static stretching after. Hold stretches for 30-60 seconds.",
+            "Increase your weekly mileage by no more than 10% to avoid overtraining and reduce injury risk.",
+            "Focus on your breathing: Try the 2:2 pattern (breathe in for 2 steps, out for 2 steps) for moderate runs.",
+            "Proper running form: Keep your head up, shoulders relaxed, and land midfoot under your hips.",
+            "Cross-training activities like cycling, swimming, or yoga can improve your running performance.",
+            "Sleep is crucial for recovery. Aim for 7-9 hours per night, especially during heavy training periods.",
+            "Fuel properly: Eat a balanced meal 2-3 hours before running, and refuel within 30 minutes post-run.",
+            "Listen to your body. Rest days are just as important as training days for improvement.",
+            "Vary your running surfaces. Mix roads, trails, and tracks to work different muscles and reduce repetitive stress.",
+            "Set SMART goals: Specific, Measurable, Achievable, Relevant, and Time-bound.",
+            "Use the talk test: During easy runs, you should be able to hold a conversation comfortably.",
+            "Strength training 2-3 times per week can improve running economy and reduce injury risk.",
+            "Practice race pace during training to prepare your body and mind for race day.",
+            "Negative splits (running the second half faster) can lead to better race performances.",
+            "Warm up with 5-10 minutes of easy jogging before speedwork or races.",
+            "Ice baths or cold showers after long runs can help reduce inflammation and speed recovery.",
+            "Track your runs in a training log to monitor progress and identify patterns."
+        ];
+
+        function getNewTip() {
+            const randomIndex = Math.floor(Math.random() * runningTips.length);
+            document.getElementById('tip-text').textContent = runningTips[randomIndex];
+
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'view_tip', {
+                    'event_category': 'engagement',
+                    'event_label': 'running_tips'
+                });
+            }
+        }
+
+        // Auto-save form data
+        function saveFormData() {
+            const formData = {
+                vdotDistance: document.getElementById('vdot-distance').value,
+                vdotMinutes: document.getElementById('vdot-minutes').value,
+                vdotSeconds: document.getElementById('vdot-seconds').value,
+                paceDistance: document.getElementById('pace-distance').value,
+                paceHours: document.getElementById('pace-hours').value,
+                paceMinutes: document.getElementById('pace-minutes').value,
+                paceSeconds: document.getElementById('pace-seconds').value,
+                weight: document.getElementById('weight').value
+            };
+            localStorage.setItem('formData', JSON.stringify(formData));
+        }
+
+        function restoreFormData() {
+            const savedData = localStorage.getItem('formData');
+            if (savedData) {
+                const formData = JSON.parse(savedData);
+                if (formData.vdotDistance) document.getElementById('vdot-distance').value = formData.vdotDistance;
+                if (formData.vdotMinutes) document.getElementById('vdot-minutes').value = formData.vdotMinutes;
+                if (formData.vdotSeconds) document.getElementById('vdot-seconds').value = formData.vdotSeconds;
+                if (formData.paceDistance) document.getElementById('pace-distance').value = formData.paceDistance;
+                if (formData.paceHours) document.getElementById('pace-hours').value = formData.paceHours;
+                if (formData.paceMinutes) document.getElementById('pace-minutes').value = formData.paceMinutes;
+                if (formData.paceSeconds) document.getElementById('pace-seconds').value = formData.paceSeconds;
+                if (formData.weight) document.getElementById('weight').value = formData.weight;
+            }
+        }
+
+        // Auto-save on input change
+        document.querySelectorAll('input, select').forEach(input => {
+            input.addEventListener('change', saveFormData);
+        });
+
+        // Restore data on load
+        restoreFormData();
+
+        // Show welcome message for first-time visitors
+        if (!localStorage.getItem('returningVisitor')) {
+            localStorage.setItem('returningVisitor', 'true');
+            setTimeout(() => {
+                alert('Welcome to Running Pace Calculator! 🏃‍♂️\n\nCalculate your VDOT, pace, splits, and more. Your data is automatically saved for convenience!');
+            }, 1000);
+        }
     </script>
 </body>
 </html>
