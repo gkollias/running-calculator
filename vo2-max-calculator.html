@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VO2 Max Calculator - Free Running Fitness Test | 2024</title>
+    <meta name="description" content="Free VO2 max calculator for runners. Estimate your maximum oxygen uptake from race times. Calculate VO2 max from 5K, 10K, marathon performance. Used by athletes and coaches.">
+    <meta name="keywords" content="VO2 max calculator, vo2 max test, maximum oxygen uptake, running fitness test, aerobic capacity calculator, VO2 max from race time">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Free VO2 Max Calculator - Estimate Maximum Oxygen Uptake">
+    <meta property="og:description" content="Calculate your VO2 max from running performance. Free tool used by athletes and coaches worldwide.">
+    
+    <link rel="canonical" href="https://www.runningpacecalculator.fit/vo2-max-calculator.html">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "VO2 Max Calculator",
+      "description": "Calculate VO2 max from running performance using scientifically validated formulas",
+      "url": "https://www.runningpacecalculator.fit/vo2-max-calculator.html",
+      "applicationCategory": "HealthApplication"
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🫁 VO2 Max Calculator - Maximum Oxygen Uptake Test</h1>
+            <p><a href="index.html" style="color: white;">← Back to All Calculators</a></p>
+        </header>
+
+        <section class="calculator-card">
+            <h2>Calculate Your VO2 Max from Running Performance</h2>
+            <p><strong>VO2 max</strong> measures your maximum oxygen uptake - the gold standard for aerobic fitness. Our calculator estimates your VO2 max from recent race performance using scientifically validated formulas.</p>
+
+            <div class="input-group">
+                <label for="vo2-distance">Race Distance</label>
+                <select id="vo2-distance">
+                    <option value="1500">1500m</option>
+                    <option value="1609.344">1 Mile</option>
+                    <option value="3000">3000m</option>
+                    <option value="5000" selected>5K</option>
+                    <option value="10000">10K</option>
+                    <option value="21097.5">Half Marathon</option>
+                    <option value="42195">Marathon</option>
+                </select>
+            </div>
+            
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="vo2-minutes">Minutes</label>
+                    <input type="number" id="vo2-minutes" min="0" value="20">
+                </div>
+                <div class="input-group">
+                    <label for="vo2-seconds">Seconds</label>
+                    <input type="number" id="vo2-seconds" min="0" max="59" value="0">
+                </div>
+            </div>
+
+            <button onclick="calculateVO2Max()">Calculate VO2 Max</button>
+            <div id="vo2-result" class="result" style="display: none;"></div>
+        </section>
+
+        <section class="calculator-card">
+            <h2>Understanding VO2 Max</h2>
+            <h3>What is VO2 Max?</h3>
+            <p><strong>VO2 max</strong> (maximum oxygen uptake) is the maximum amount of oxygen your body can utilize during intense exercise. It's measured in milliliters of oxygen consumed per kilogram of body weight per minute (ml/kg/min).</p>
+
+            <h3>VO2 Max Classifications:</h3>
+            <ul>
+                <li><strong>Elite Athletes:</strong> 70+ ml/kg/min (men), 60+ ml/kg/min (women)</li>
+                <li><strong>Excellent:</strong> 55-70 ml/kg/min (men), 45-60 ml/kg/min (women)</li>
+                <li><strong>Good:</strong> 45-55 ml/kg/min (men), 35-45 ml/kg/min (women)</li>
+                <li><strong>Average:</strong> 35-45 ml/kg/min (men), 25-35 ml/kg/min (women)</li>
+                <li><strong>Below Average:</strong> <35 ml/kg/min (men), <25 ml/kg/min (women)</li>
+            </ul>
+
+            <h3>How to Improve VO2 Max:</h3>
+            <ul>
+                <li>High-intensity interval training (HIIT)</li>
+                <li>Tempo runs at lactate threshold</li>
+                <li>Long aerobic base building</li>
+                <li>Consistent training over time</li>
+            </ul>
+        </section>
+    </div>
+
+    <script>
+        function calculateVO2Max() {
+            const distance = parseFloat(document.getElementById('vo2-distance').value);
+            const minutes = parseInt(document.getElementById('vo2-minutes').value);
+            const seconds = parseInt(document.getElementById('vo2-seconds').value);
+            
+            const totalMinutes = minutes + seconds / 60;
+            const velocityMeterPerMin = distance / totalMinutes;
+            
+            // Calculate VO2 using Jack Daniels formula
+            const vo2 = -4.60 + 0.182258 * velocityMeterPerMin + 0.000104 * velocityMeterPerMin * velocityMeterPerMin;
+            const percentMax = 0.8 + 0.1894393 * Math.exp(-0.012778 * totalMinutes) + 0.2989558 * Math.exp(-0.1932605 * totalMinutes);
+            const vo2Max = vo2 / percentMax;
+            
+            let classification = '';
+            if (vo2Max >= 60) classification = 'Elite/Superior';
+            else if (vo2Max >= 50) classification = 'Excellent';
+            else if (vo2Max >= 40) classification = 'Good';
+            else if (vo2Max >= 30) classification = 'Average';
+            else classification = 'Below Average';
+            
+            const resultHTML = `
+                <h3>Your VO2 Max Results</h3>
+                <div class="result-item"><strong>Estimated VO2 Max:</strong> ${vo2Max.toFixed(1)} ml/kg/min</div>
+                <div class="result-item"><strong>Fitness Level:</strong> ${classification}</div>
+                <div class="result-item"><strong>VDOT Equivalent:</strong> ${vo2Max.toFixed(1)}</div>
+                <p style="margin-top: 15px; font-size: 14px; color: #666;">
+                    <strong>Note:</strong> This is an estimate based on running performance. Laboratory testing provides the most accurate VO2 max measurement.
+                </p>
+            `;
+            
+            document.getElementById('vo2-result').innerHTML = resultHTML;
+            document.getElementById('vo2-result').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marathon Pace Calculator - Free Training & Race Pace Tool | 2024</title>
+    <meta name="description" content="Free marathon pace calculator. Calculate goal pace, splits, and training paces for marathon success. Get mile and kilometer splits for your marathon race strategy.">
+    <meta name="keywords" content="marathon pace calculator, marathon splits, marathon training pace, 26.2 mile pace, marathon race strategy, marathon pacing chart">
+    
+    <link rel="canonical" href="https://www.runningpacecalculator.fit/marathon-pace-calculator.html">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🏃‍♂️ Marathon Pace Calculator - 26.2 Mile Training Tool</h1>
+            <p><a href="index.html" style="color: white;">← Back to All Calculators</a></p>
+        </header>
+
+        <section class="calculator-card">
+            <h2>Calculate Your Marathon Pace & Race Splits</h2>
+            <p>Plan your <strong>marathon race strategy</strong> with precise pace calculations and splits. Whether you're aiming for a Boston Qualifier or personal best, our calculator provides the pacing you need.</p>
+
+            <div class="input-group">
+                <label for="marathon-goal-time">Marathon Goal Time</label>
+                <div class="input-row">
+                    <input type="number" id="marathon-hours" placeholder="Hours" min="1" max="8" value="3">
+                    <input type="number" id="marathon-minutes" placeholder="Minutes" min="0" max="59" value="30">
+                    <input type="number" id="marathon-seconds" placeholder="Seconds" min="0" max="59" value="0">
+                </div>
+            </div>
+
+            <div class="unit-toggle">
+                <button class="active" onclick="toggleMarathonUnit('km')" id="km-btn">Kilometers</button>
+                <button onclick="toggleMarathonUnit('mi')" id="mi-btn">Miles</button>
+            </div>
+
+            <button onclick="calculateMarathonPace()">Calculate Marathon Pace & Splits</button>
+            <div id="marathon-result" class="result" style="display: none;"></div>
+        </section>
+
+        <section class="calculator-card">
+            <h2>Marathon Training Guidelines</h2>
+            <h3>Marathon Pace Training:</h3>
+            <ul>
+                <li><strong>Easy Runs:</strong> 1-2 minutes per mile slower than marathon pace</li>
+                <li><strong>Long Runs:</strong> Mix of easy pace with marathon pace segments</li>
+                <li><strong>Tempo Runs:</strong> 15-30 seconds per mile faster than marathon pace</li>
+                <li><strong>Marathon Pace Runs:</strong> Practice goal pace for 8-20 mile segments</li>
+            </ul>
+
+            <h3>Popular Marathon Time Goals:</h3>
+            <ul>
+                <li><strong>Sub-3:00:</strong> 6:52 min/mile (4:16 min/km) - Boston Qualifier</li>
+                <li><strong>Sub-3:30:</strong> 8:00 min/mile (4:58 min/km)</li>
+                <li><strong>Sub-4:00:</strong> 9:09 min/mile (5:41 min/km)</li>
+                <li><strong>Sub-4:30:</strong> 10:17 min/mile (6:23 min/km)</li>
+                <li><strong>Sub-5:00:</strong> 11:26 min/mile (7:06 min/km)</li>
+            </ul>
+        </section>
+    </div>
+
+    <script>
+        let marathonUnit = 'km';
+
+        function toggleMarathonUnit(unit) {
+            marathonUnit = unit;
+            document.getElementById('km-btn').classList.remove('active');
+            document.getElementById('mi-btn').classList.remove('active');
+            if (unit === 'km') {
+                document.getElementById('km-btn').classList.add('active');
+            } else {
+                document.getElementById('mi-btn').classList.add('active');
+            }
+        }
+
+        function calculateMarathonPace() {
+            const hours = parseInt(document.getElementById('marathon-hours').value) || 0;
+            const minutes = parseInt(document.getElementById('marathon-minutes').value) || 0;
+            const seconds = parseInt(document.getElementById('marathon-seconds').value) || 0;
+            
+            const totalSeconds = hours * 3600 + minutes * 60 + seconds;
+            
+            // Marathon distance
+            const marathonKm = 42.195;
+            const marathonMiles = 26.219;
+            
+            let paceSeconds, distance, unitText;
+            if (marathonUnit === 'km') {
+                paceSeconds = totalSeconds / marathonKm;
+                distance = marathonKm;
+                unitText = 'km';
+            } else {
+                paceSeconds = totalSeconds / marathonMiles;
+                distance = marathonMiles;
+                unitText = 'mile';
+            }
+            
+            const paceMinutes = Math.floor(paceSeconds / 60);
+            const paceSecondsRemainder = Math.round(paceSeconds % 60);
+            
+            // Generate splits
+            let splitsHTML = '<h4>Race Splits:</h4><div class="pace-splits">';
+            
+            if (marathonUnit === 'km') {
+                // Kilometer splits
+                const kmSplits = [5, 10, 15, 20, 25, 30, 35, 40, 42.195];
+                kmSplits.forEach(km => {
+                    const splitTime = km * paceSeconds;
+                    const splitHours = Math.floor(splitTime / 3600);
+                    const splitMin = Math.floor((splitTime % 3600) / 60);
+                    const splitSec = Math.round(splitTime % 60);
+                    
+                    let timeStr = splitHours > 0 ? 
+                        `${splitHours}:${splitMin.toString().padStart(2, '0')}:${splitSec.toString().padStart(2, '0')}` :
+                        `${splitMin}:${splitSec.toString().padStart(2, '0')}`;
+                    
+                    splitsHTML += `<div class="pace-split"><div class="pace-split-distance">${km}K</div><div class="pace-split-time">${timeStr}</div></div>`;
+                });
+            } else {
+                // Mile splits
+                const mileSplits = [5, 10, 13.1, 15, 20, 26.219];
+                mileSplits.forEach(mile => {
+                    const splitTime = mile * paceSeconds;
+                    const splitHours = Math.floor(splitTime / 3600);
+                    const splitMin = Math.floor((splitTime % 3600) / 60);
+                    const splitSec = Math.round(splitTime % 60);
+                    
+                    let timeStr = splitHours > 0 ? 
+                        `${splitHours}:${splitMin.toString().padStart(2, '0')}:${splitSec.toString().padStart(2, '0')}` :
+                        `${splitMin}:${splitSec.toString().padStart(2, '0')}`;
+                    
+                    const displayMile = mile === 26.219 ? '26.2' : mile === 13.1 ? '13.1' : mile;
+                    splitsHTML += `<div class="pace-split"><div class="pace-split-distance">${displayMile}mi</div><div class="pace-split-time">${timeStr}</div></div>`;
+                });
+            }
+            
+            splitsHTML += '</div>';
+            
+            const resultHTML = `
+                <h3>Marathon Pacing Strategy</h3>
+                <div class="result-item"><strong>Goal Time:</strong> ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}</div>
+                <div class="result-item"><strong>Pace per ${unitText}:</strong> ${paceMinutes}:${paceSecondsRemainder.toString().padStart(2, '0')}</div>
+                ${marathonUnit === 'km' ? 
+                    `<div class="result-item"><strong>Mile Pace:</strong> ${Math.floor((paceSeconds * 1.60934) / 60)}:${Math.round((paceSeconds * 1.60934) % 60).toString().padStart(2, '0')}</div>` :
+                    `<div class="result-item"><strong>Kilometer Pace:</strong> ${Math.floor((paceSeconds / 1.60934) / 60)}:${Math.round((paceSeconds / 1.60934) % 60).toString().padStart(2, '0')}</div>`
+                }
+                ${splitsHTML}
+            `;
+            
+            document.getElementById('marathon-result').innerHTML = resultHTML;
+            document.getElementById('marathon-result').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
