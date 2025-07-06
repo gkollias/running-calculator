@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Running Calculator</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Contact Us</h1>
+            <p><a href="index.html" style="color: white;">← Back to Calculator</a></p>
+        </div>
+
+        <div class="calculator-card" style="margin-top: 30px;">
+            <h2>📧 Get in Touch</h2>
+            <p>We'd love to hear from you! Whether you have questions about our calculators, suggestions for improvements, or need technical support, we're here to help.</p>
+
+            <div style="margin: 30px 0;">
+                <h3 style="color: #667eea; margin-bottom: 15px;">📬 Contact Information</h3>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <p><strong>Email:</strong> gkollias13@gmail.com</p>
+                    <p><strong>Response Time:</strong> Usually within 24 hours</p>
+                    <p><strong>Business Hours:</strong> Monday - Friday, 9 AM - 5 PM EST</p>
+                </div>
+            </div>
+
+            <h3 style="color: #667eea; margin-bottom: 15px;">💬 Contact Form</h3>
+            <form id="contactForm" style="margin-bottom: 30px;">
+                <div class="input-group">
+                    <label for="contact-name">Name *</label>
+                    <input type="text" id="contact-name" required style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px;">
+                </div>
+
+                <div class="input-group">
+                    <label for="contact-email">Email *</label>
+                    <input type="email" id="contact-email" required style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px;">
+                </div>
+
+                <div class="input-group">
+                    <label for="contact-subject">Subject *</label>
+                    <select id="contact-subject" required style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px;">
+                        <option value="">Select a topic...</option>
+                        <option value="bug-report">Bug Report</option>
+                        <option value="feature-request">Feature Request</option>
+                        <option value="general-question">General Question</option>
+                        <option value="technical-support">Technical Support</option>
+                        <option value="feedback">Feedback</option>
+                        <option value="partnership">Partnership Inquiry</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="contact-message">Message *</label>
+                    <textarea id="contact-message" required rows="6" placeholder="Please describe your question or issue in detail..." style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; resize: vertical; font-family: inherit;"></textarea>
+                </div>
+
+                <button type="submit" style="width: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer;">
+                    Send Message
+                </button>
+            </form>
+
+            <div id="form-status" style="display: none; padding: 15px; border-radius: 8px; margin-top: 15px;"></div>
+        </div>
+
+        <div class="calculator-card" style="margin-top: 20px;">
+            <h2>❓ Frequently Asked Questions</h2>
+            <div style="text-align: left;">
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #667eea; margin-bottom: 8px;">How do I report a bug or calculation error?</h4>
+                    <p>Please use the contact form above with "Bug Report" selected. Include details about what you were calculating, the inputs you used, and what you expected vs. what you got.</p>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #667eea; margin-bottom: 8px;">Can you add new calculators or features?</h4>
+                    <p>We're always looking to improve! Select "Feature Request" in the contact form and tell us what you'd like to see added.</p>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #667eea; margin-bottom: 8px;">Are your calculators accurate?</h4>
+                    <p>Our calculators use scientifically validated formulas from exercise physiology research. While individual results may vary, they provide excellent estimates for training and racing.</p>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #667eea; margin-bottom: 8px;">Is this website free to use?</h4>
+                    <p>Yes! All our running calculators are completely free. We support the site through advertising to keep it free for all runners.</p>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #667eea; margin-bottom: 8px;">Do you have a mobile app?</h4>
+                    <p>Our website is fully responsive and works great on mobile devices. We're considering a dedicated app - let us know if you'd be interested!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="calculator-card" style="margin-top: 20px;">
+            <h2>🤝 Partner With Us</h2>
+            <p>Are you a running coach, training platform, or fitness company? We're open to partnerships and collaborations. Contact us to discuss how we can work together to help more runners achieve their goals.</p>
+            
+            <div style="margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+                <h4 style="color: #667eea; margin-bottom: 10px;">Partnership Opportunities:</h4>
+                <ul style="margin-left: 20px;">
+                    <li>Integration with training platforms</li>
+                    <li>Custom calculator development</li>
+                    <li>Co-marketing opportunities</li>
+                    <li>Educational content collaboration</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer style="text-align: center; padding: 40px 20px; color: white; font-size: 14px;">
+            <p>&copy; 2024 Running Calculator. Free tools for runners worldwide.</p>
+            <div style="margin-top: 15px;">
+                <a href="privacy-policy.html" style="color: white; margin: 0 10px;">Privacy Policy</a>
+                <a href="terms-of-use.html" style="color: white; margin: 0 10px;">Terms of Use</a>
+                <a href="contact.html" style="color: white; margin: 0 10px;">Contact</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Contact form handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const statusDiv = document.getElementById('form-status');
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const subject = document.getElementById('contact-subject').value;
+            const message = document.getElementById('contact-message').value;
+            
+            // Basic validation
+            if (!name || !email || !subject || !message) {
+                statusDiv.style.display = 'block';
+                statusDiv.style.background = '#f44336';
+                statusDiv.style.color = 'white';
+                statusDiv.innerHTML = '❌ Please fill in all required fields.';
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                statusDiv.style.display = 'block';
+                statusDiv.style.background = '#f44336';
+                statusDiv.style.color = 'white';
+                statusDiv.innerHTML = '❌ Please enter a valid email address.';
+                return;
+            }
+
+            // Simulate form submission (replace with actual form handling)
+            statusDiv.style.display = 'block';
+            statusDiv.style.background = '#4CAF50';
+            statusDiv.style.color = 'white';
+            statusDiv.innerHTML = '✅ Thank you for your message! We\'ll get back to you within 24 hours.';
+
+            // Create mailto link as fallback
+            const mailtoLink = `mailto:gkollias13@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+            
+            setTimeout(() => {
+                window.location.href = mailtoLink;
+            }, 2000);
+
+            // Reset form
+            this.reset();
+
+            // Track contact form submission
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'contact_form_submit', {
+                    'event_category': 'engagement',
+                    'event_label': subject
+                });
+            }
+        });
+
+        // Track page view
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'page_view', {
+                'page_title': 'Contact Page',
+                'page_location': window.location.href
+            });
+        }
+    </script>
+</body>
+</html>

@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free running calculator - Calculate VDOT, pace, splits, heart rate zones, and race predictions for runners">
-    <meta name="keywords" content="running calculator, pace calculator, VDOT calculator, running pace, marathon pace">
-    <meta property="og:title" content="Running Pace Calculator">
-    <meta property="og:description" content="Calculate your running pace, VDOT, and training zones">
+    <meta name="description" content="Free running calculator - Calculate VDOT, pace, splits, heart rate zones, and race predictions for runners. Improve your training with scientific running formulas.">
+    <meta name="keywords" content="running calculator, pace calculator, VDOT calculator, running pace, marathon pace, running training, heart rate zones, race predictor">
+    <meta property="og:title" content="Advanced Running Calculator - Free Training Tools">
+    <meta property="og:description" content="Calculate your running pace, VDOT, and training zones with our comprehensive running calculator. Based on Jack Daniels' formula.">
     <meta property="og:image" content="assets/images/preview-image.png">
-    <title>Advanced Running Calculator</title>
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.runningpacecalculator.fit">
+    <title>Advanced Running Calculator - Free VDOT, Pace & Training Tools</title>
 
     <!-- Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5RRK53R703"></script>
@@ -32,18 +34,34 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3736890362318036"
      crossorigin="anonymous"></script>
 
-    <!-- Vercel Analytics -->
-    <script defer src="/_vercel/insights/script.js"></script>
-    
     <!-- CSS Files -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/animations.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Running Calculator",
+      "description": "Advanced running calculator for VDOT, pace, splits, and training zones",
+      "url": "https://www.runningpacecalculator.fit",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      }
+    }
+    </script>
 </head>
 <body>
     <div class="container">
+        <!-- Header with Enhanced Content -->
         <div class="header">
             <h1><span class="runner-emoji">🏃‍♂️</span> Advanced Running Calculator</h1>
-            <p>Calculate VDOT, pace, splits, and optimize your training</p>
+            <p>Professional running calculators based on Jack Daniels' Running Formula and scientific research. Calculate VDOT scores, training paces, race predictions, and optimize your running performance.</p>
         </div>
 
         <!-- Stats bar -->
@@ -69,7 +87,6 @@
         <!-- Top Banner Ad -->
         <div class="ad-container">
             <div class="ad-label">Advertisement</div>
-            <!-- Display ad - 728x90 (Desktop) or 320x50 (Mobile) -->
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-3736890362318036"
@@ -82,9 +99,10 @@
         </div>
 
         <div class="calculators-grid">
-            <!-- VDOT Calculator -->
+            <!-- VDOT Calculator with Enhanced Description -->
             <div class="calculator-card">
                 <h2>📊 VDOT Calculator</h2>
+                <p style="margin-bottom: 15px; font-size: 14px; color: #666;">Calculate your VDOT score based on Jack Daniels' Running Formula. VDOT represents your current running fitness and provides training paces for optimal improvement.</p>
                 <div class="input-group">
                     <label for="vdot-distance">Race Distance</label>
                     <select id="vdot-distance">
@@ -111,9 +129,10 @@
                 <div id="vdot-result" class="result" style="display: none;"></div>
             </div>
 
-            <!-- Pace Calculator -->
+            <!-- Pace Calculator with Enhanced Description -->
             <div class="calculator-card">
                 <h2>⏱️ Pace Calculator</h2>
+                <p style="margin-bottom: 15px; font-size: 14px; color: #666;">Convert between time, distance, and pace. Calculate your running speed and pace per kilometer or mile for any workout or race.</p>
                 <div class="unit-toggle">
                     <button class="active" onclick="togglePaceUnit('km')">Kilometers</button>
                     <button onclick="togglePaceUnit('mi')">Miles</button>
@@ -140,9 +159,10 @@
                 <div id="pace-result" class="result" style="display: none;"></div>
             </div>
 
-            <!-- Split Calculator -->
+            <!-- Split Calculator with Enhanced Description -->
             <div class="calculator-card">
                 <h2>📈 Split Calculator</h2>
+                <p style="margin-bottom: 15px; font-size: 14px; color: #666;">Generate precise race splits for your target pace. Plan your race strategy with kilometer or mile splits for optimal pacing.</p>
                 <div class="input-group">
                     <label for="split-pace-min">Target Pace (min/km)</label>
                     <div class="input-row">
@@ -163,9 +183,10 @@
                 <div id="split-result" class="result" style="display: none;"></div>
             </div>
 
-            <!-- Training Zones Calculator -->
+            <!-- Training Zones Calculator with Enhanced Description -->
             <div class="calculator-card">
                 <h2>❤️ Heart Rate Training Zones</h2>
+                <p style="margin-bottom: 15px; font-size: 14px; color: #666;">Calculate your heart rate training zones for different workout intensities. Optimize your training with scientific heart rate zones.</p>
                 <div class="input-group">
                     <label for="max-hr">Maximum Heart Rate</label>
                     <input type="number" id="max-hr" placeholder="Enter max HR or age" value="180">
@@ -178,9 +199,10 @@
                 <div id="hr-result" class="result" style="display: none;"></div>
             </div>
 
-            <!-- Race Predictor -->
+            <!-- Race Predictor with Enhanced Description -->
             <div class="calculator-card">
                 <h2>🏆 Race Time Predictor</h2>
+                <p style="margin-bottom: 15px; font-size: 14px; color: #666;">Predict race times across different distances using Riegel's formula. Plan your racing goals based on current fitness.</p>
                 <div class="input-group">
                     <label for="known-distance">Known Race Distance</label>
                     <select id="known-distance">
@@ -208,9 +230,10 @@
                 <div id="predict-result" class="result" style="display: none;"></div>
             </div>
 
-            <!-- Calorie Calculator -->
+            <!-- Calorie Calculator with Enhanced Description -->
             <div class="calculator-card">
                 <h2>🔥 Running Calorie Calculator</h2>
+                <p style="margin-bottom: 15px; font-size: 14px; color: #666;">Estimate calories burned during your runs using MET values and scientific formulas. Track your energy expenditure accurately.</p>
                 <div class="input-group">
                     <label for="weight">Weight (kg)</label>
                     <input type="number" id="weight" step="0.1" value="70">
@@ -228,6 +251,88 @@
             </div>
         </div>
 
+        <!-- Middle Ad -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-3736890362318036"
+                 data-ad-slot="0987654321"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <!-- Training Guide Section -->
+        <div class="calculator-card" style="margin-top: 20px;">
+            <h2>📚 Running Training Guide</h2>
+            <div style="text-align: left; line-height: 1.6;">
+                <h3 style="color: #667eea; margin-bottom: 10px;">Understanding VDOT</h3>
+                <p>VDOT is a measure of your current running fitness based on your race performance. Developed by exercise physiologist Jack Daniels, it provides a single number that represents your running ability and helps determine appropriate training paces.</p>
+                
+                <h3 style="color: #667eea; margin-bottom: 10px; margin-top: 20px;">Training Pace Guidelines</h3>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li><strong>Easy Pace:</strong> 65-79% of max heart rate. Used for recovery runs and base building.</li>
+                    <li><strong>Marathon Pace:</strong> The pace you can sustain for 26.2 miles. Important for marathon training.</li>
+                    <li><strong>Threshold Pace:</strong> The pace you can sustain for about 1 hour. Improves lactate clearance.</li>
+                    <li><strong>Interval Pace:</strong> VO2 max pace. Improves maximum oxygen uptake.</li>
+                    <li><strong>Repetition Pace:</strong> Faster than 5K pace. Improves neuromuscular power and speed.</li>
+                </ul>
+
+                <h3 style="color: #667eea; margin-bottom: 10px; margin-top: 20px;">How to Use These Calculators</h3>
+                <p>Start with the VDOT calculator using a recent race time to establish your current fitness level. Use the resulting training paces for your workouts. The pace calculator helps with daily run planning, while the split calculator is essential for race strategy. Monitor your heart rate zones during training to ensure you're hitting the right intensities.</p>
+            </div>
+        </div>
+
+        <!-- Running Tips Section -->
+        <div class="calculator-card" style="margin-top: 20px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+            <h2 style="color: #333;">💡 Expert Running Tips</h2>
+            <div id="running-tip" style="font-size: 16px; line-height: 1.6; color: #444; margin: 15px 0;">
+                <p><strong>Tip:</strong> <span id="tip-text">For optimal performance, aim to do 80% of your training at an easy pace and 20% at higher intensities.</span></p>
+            </div>
+            <button onclick="getNewTip()" style="background: #667eea; width: auto; padding: 8px 20px;">Get New Tip</button>
+        </div>
+
+        <!-- Introduction Section -->
+        <div class="calculator-card" style="margin-bottom: 30px; text-align: center;">
+            <h2>🎯 Why Use Our Running Calculator?</h2>
+            <div style="text-align: left; line-height: 1.6;">
+                <p>Our comprehensive running calculator suite helps runners of all levels optimize their training and performance. Whether you're preparing for your first 5K or training for a marathon, these scientifically-based tools provide accurate calculations for:</p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li><strong>VDOT Analysis:</strong> Determine your current fitness level and get personalized training paces</li>
+                    <li><strong>Pace Conversion:</strong> Convert between time, distance, and pace for any running workout</li>
+                    <li><strong>Race Splits:</strong> Plan your race strategy with precise kilometer or mile splits</li>
+                    <li><strong>Heart Rate Zones:</strong> Calculate optimal training zones for different workout types</li>
+                    <li><strong>Race Predictions:</strong> Estimate performance across different distances using proven formulas</li>
+                    <li><strong>Calorie Estimation:</strong> Track energy expenditure during your runs</li>
+                </ul>
+                <p>All calculations are based on peer-reviewed research and proven formulas used by elite coaches worldwide.</p>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="calculator-card" style="margin-top: 20px;">
+            <h2>❓ Frequently Asked Questions</h2>
+            <div style="text-align: left;">
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #667eea; margin-bottom: 8px;">How accurate are these running calculators?</h4>
+                    <p>Our calculators use scientifically validated formulas including Jack Daniels' VDOT equation and Riegel's formula for race predictions. While individual results may vary, these provide excellent estimates for training and racing purposes.</p>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #667eea; margin-bottom: 8px;">How often should I recalculate my VDOT?</h4>
+                    <p>Update your VDOT every 4-6 weeks or after significant races. As your fitness improves, your VDOT will increase, requiring adjustments to your training paces.</p>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #667eea; margin-bottom: 8px;">Can beginners use these calculators?</h4>
+                    <p>Absolutely! These tools are valuable for runners of all levels. Beginners can use them to establish appropriate training paces and avoid overtraining, while experienced runners can fine-tune their training.</p>
+                </div>
+            </div>
+        </div>
+
         <!-- Bottom Ad -->
         <div class="ad-container">
             <div class="ad-label">Advertisement</div>
@@ -241,15 +346,17 @@
                  (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
         </div>
-        
-        <!-- Running Tips Section -->
-        <div class="calculator-card" style="margin-top: 20px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
-            <h2 style="color: #333;">💡 Quick Running Tips</h2>
-            <div id="running-tip" style="font-size: 16px; line-height: 1.6; color: #444; margin: 15px 0;">
-                <p><strong>Tip:</strong> <span id="tip-text">For optimal performance, aim to do 80% of your training at an easy pace and 20% at higher intensities.</span></p>
+
+        <!-- Footer -->
+        <footer style="text-align: center; padding: 40px 20px; color: white; font-size: 14px;">
+            <p>&copy; 2024 Running Calculator. Free tools for runners worldwide.</p>
+            <p style="margin-top: 10px;">Based on scientific formulas by Jack Daniels, PhD and other exercise physiologists.</p>
+            <div style="margin-top: 15px;">
+                <a href="privacy_policy.html" style="color: white; margin: 0 10px;">Privacy Policy</a>
+                <a href="terms_of_use.html" style="color: white; margin: 0 10px;">Terms of Use</a>
+                <a href="contact.html" style="color: white; margin: 0 10px;">Contact</a>
             </div>
-            <button onclick="getNewTip()" style="background: #667eea; width: auto; padding: 8px 20px;">Get New Tip</button>
-        </div>
+        </footer>
     </div>
 
     <!-- JavaScript Files -->
