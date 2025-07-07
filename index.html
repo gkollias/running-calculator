@@ -133,6 +133,15 @@
             <p>Professional running calculators for training optimization. Calculate VDOT scores, training paces, race predictions, and VO2 max estimates using Jack Daniels' Running Formula and scientific research.</p>
         </header>
 
+        <!-- ADD: Navigation Menu for Educational Sections -->
+        <nav style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 15px; margin: 20px 0; text-align: center;">
+            <a href="#calculators" style="color: white; margin: 0 15px; text-decoration: none; font-weight: 500;">Calculators</a>
+            <a href="#training-science" style="color: white; margin: 0 15px; text-decoration: none; font-weight: 500;">Training Science</a>
+            <a href="#workout-plans" style="color: white; margin: 0 15px; text-decoration: none; font-weight: 500;">Workout Plans</a>
+            <a href="#nutrition-guide" style="color: white; margin: 0 15px; text-decoration: none; font-weight: 500;">Nutrition</a>
+            <a href="#coaching-tips" style="color: white; margin: 0 15px; text-decoration: none; font-weight: 500;">Coaching</a>
+        </nav>
+
         <!-- Breadcrumbs for SEO -->
         <nav aria-label="breadcrumb" style="margin-bottom: 20px;">
             <ol style="display: flex; list-style: none; padding: 0; color: white; font-size: 14px;">
@@ -195,7 +204,7 @@
             </script>
         </div>
 
-        <main class="calculators-grid">
+        <main id="calculators" class="calculators-grid">
             <!-- Enhanced VDOT Calculator with More Keywords -->
             <section class="calculator-card">
                 <h2>📊 VDOT Calculator - Jack Daniels Running Formula</h2>
@@ -362,6 +371,67 @@
             </script>
         </div>
 
+        <!-- Running Tips Section -->
+        <section class="calculator-card" style="margin-top: 20px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+            <h2 style="color: #333;">💡 Expert Running Tips & Training Advice</h2>
+            <div id="running-tip" style="font-size: 16px; line-height: 1.6; color: #444; margin: 15px 0;">
+                <p><strong>Tip:</strong> <span id="tip-text">For optimal performance, aim to do 80% of your training at an easy pace and 20% at higher intensities.</span></p>
+            </div>
+            <button onclick="getNewTip()" style="background: #667eea; width: auto; padding: 8px 20px;" aria-label="Get new running tip">Get New Training Tip</button>
+        </section>
+
+        <!-- ADD: Nutrition and Recovery Section -->
+        <section id="nutrition-guide" class="calculator-card" style="margin-top: 20px;">
+            <h2>🥗 Sports Nutrition & Recovery Science</h2>
+            <div style="text-align: left; line-height: 1.7;">
+                <h3 style="color: #667eea; margin-bottom: 15px;">Evidence-Based Nutrition for Runners</h3>
+                <p>Proper nutrition is crucial for training adaptation, performance, and recovery. Research-backed nutrition strategies can significantly impact your running performance and overall health.</p>
+
+                <h4 style="color: #667eea; margin: 20px 0 10px 0;">Daily Macronutrient Requirements</h4>
+                <ul style="margin: 10px 0; padding-left: 25px;">
+                    <li><strong>Carbohydrates:</strong> 5-7g per kg body weight for moderate training, 7-10g per kg for high-volume training</li>
+                    <li><strong>Protein:</strong> 1.2-1.6g per kg body weight for endurance athletes</li>
+                    <li><strong>Fat:</strong> 20-35% of total daily calories from healthy sources</li>
+                    <li><strong>Hydration:</strong> 35-40ml per kg body weight plus replacement of sweat losses</li>
+                </ul>
+
+                <h4 style="color: #667eea; margin: 20px 0 10px 0;">Pre-Exercise Fueling Strategy</h4>
+                <p>Optimize performance with evidence-based pre-run nutrition:</p>
+                <ul style="margin: 10px 0; padding-left: 25px;">
+                    <li><strong>3-4 hours before:</strong> 1-4g carbs per kg body weight, moderate protein, low fat and fiber</li>
+                    <li><strong>1-2 hours before:</strong> 1-2g carbs per kg body weight, easily digestible foods</li>
+                    <li><strong>30-60 minutes before:</strong> 15-30g carbs, familiar foods only</li>
+                    <li><strong>Hydration:</strong> 400-600ml fluid 2-3 hours before, 150-250ml 15-20 minutes before</li>
+                </ul>
+
+                <h4 style="color: #667eea; margin: 20px 0 10px 0;">During Exercise Nutrition (>60 minutes)</h4>
+                <ul style="margin: 10px 0; padding-left: 25px;">
+                    <li><strong>Carbohydrate intake:</strong> 30-60g per hour for runs 1-2.5 hours, up to 90g per hour for runs >2.5 hours</li>
+                    <li><strong>Fluid replacement:</strong> 150-250ml every 15-20 minutes or to thirst</li>
+                    <li><strong>Electrolytes:</strong> 200-700mg sodium per hour in hot conditions or for heavy sweaters</li>
+                    <li><strong>Practice strategy:</strong> Train your gut with race-day fueling during long runs</li>
+                </ul>
+
+                <h4 style="color: #667eea; margin: 20px 0 10px 0;">Post-Exercise Recovery Nutrition</h4>
+                <p>Optimize recovery within the golden window:</p>
+                <ul style="margin: 10px 0; padding-left: 25px;">
+                    <li><strong>Within 30 minutes:</strong> 1.0-1.2g carbs per kg body weight plus 0.25-0.3g protein per kg</li>
+                    <li><strong>Carbohydrate timing:</strong> Continue 1.0-1.2g carbs per kg every 2 hours for 4-6 hours</li>
+                    <li><strong>Protein quality:</strong> Complete proteins with all essential amino acids (whey, casein, eggs, lean meats)</li>
+                    <li><strong>Rehydration:</strong> 150% of fluid losses (weigh yourself before and after runs)</li>
+                </ul>
+
+                <h4 style="color: #667eea; margin: 20px 0 10px 0;">Recovery Optimization Strategies</h4>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                    <p><strong>Sleep:</strong> 7-9 hours per night, consistent sleep schedule, cool dark environment</p>
+                    <p><strong>Active Recovery:</strong> Light movement, walking, easy swimming on rest days</p>
+                    <p><strong>Stress Management:</strong> Meditation, yoga, breathing exercises to manage cortisol</p>
+                    <p><strong>Cold Therapy:</strong> Ice baths (10-15°C for 10-15 minutes) after hard training</p>
+                    <p><strong>Massage/Foam Rolling:</strong> 10-15 minutes daily for muscle maintenance</p>
+                </div>
+            </div>
+        </section>
+
         <!-- Enhanced Training Guide with Target Keywords -->
         <section class="calculator-card" style="margin-top: 20px;">
             <h2>📚 Complete Running Training Guide - VDOT, VO2 Max & Pace Training</h2>
@@ -386,6 +456,91 @@
             </div>
         </section>
 
+        <!-- ADD: Coaching and Advanced Training Section -->
+        <section id="coaching-tips" class="calculator-card" style="margin-top: 20px;">
+            <h2>🎯 Professional Coaching Insights & Advanced Training</h2>
+            <div style="text-align: left; line-height: 1.7;">
+                <h3 style="color: #667eea; margin-bottom: 15px;">Coaching Philosophy and Training Principles</h3>
+                <p>Elite coaching combines art and science, applying research-backed principles while adapting to individual athlete needs. Our platform incorporates insights from world-class coaches and exercise physiologists.</p>
+
+                <h4 style="color: #667eea; margin: 20px 0 10px 0;">Individual Training Adaptation</h4>
+                <p>Every runner responds differently to training stimuli. Key factors affecting adaptation include:</p>
+                <ul style="margin: 10px 0; padding-left: 25px;">
+                    <li><strong>Training Age:</strong> Years of consistent training affect adaptation rate</li>
+                    <li><strong>Genetic Factors:</strong> Fiber type distribution, VO2 max potential, recovery capacity</li>
+                    <li><strong>Lifestyle Factors:</strong> Sleep quality, stress levels, nutrition, work demands</li>
+                    <li><strong>Training History:</strong> Previous injuries, training backgrounds, seasonal patterns</li>
+                </ul>
+
+                <h4 style="color: #667eea; margin: 20px 0 10px 0;">Monitoring Training Load and Recovery</h4>
+                <p>Successful training requires balancing stress and recovery. Modern monitoring methods include:</p>
+                <ul style="margin: 10px 0; padding-left: 25px;">
+                    <li><strong>Heart Rate Variability (HRV):</strong> Daily measurements to assess autonomic nervous system status</li>
+                    <li><strong>Resting Heart Rate:</strong> Elevated RHR may indicate insufficient recovery</li>
+                    <li><strong>Subjective Wellness:</strong> Sleep quality, energy levels, motivation, soreness ratings</li>
+                    <li><strong>Performance Metrics:</strong> Pace at given heart rates, power output, running economy</li>
+                </ul>
+
+                <h4 style="color: #667eea; margin: 20px 0 10px 0;">Advanced Training Concepts</h4>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                    <h5 style="color: #667eea; margin-bottom: 10px;">Polarized Training Model</h5>
+                    <p>Research supports 80% low intensity, 20% high intensity distribution. Avoid the "moderate intensity trap" where too much training occurs in Zone 2-3.</p>
+                    
+                    <h5 style="color: #667eea; margin: 20px 0 10px 0;">Block Periodization</h5>
+                    <p>Focus on specific training qualities in concentrated blocks: accumulation (volume), intensification (quality), realization (race preparation).</p>
+                    
+                    <h5 style="color: #667eea; margin: 20px 0 10px 0;">Altitude Training</h5>
+                    <p>Live high, train low methodology optimizes erythropoietin production while maintaining high-intensity training capacity.</p>
+                    
+                    <h5 style="color: #667eea; margin: 20px 0 10px 0;">Heat Acclimatization</h5>
+                    <p>Progressive heat exposure improves plasma volume, sweat rate, and thermoregulatory efficiency for racing in hot conditions.</p>
+                </div>
+
+                <h4 style="color: #667eea; margin: 20px 0 10px 0;">Injury Prevention Strategies</h4>
+                <p>Proactive injury prevention is more effective than reactive treatment:</p>
+                <ul style="margin: 10px 0; padding-left: 25px;">
+                    <li><strong>Progressive Overload:</strong> Follow the 10% rule for weekly mileage increases</li>
+                    <li><strong>Strength Training:</strong> 2-3 sessions per week focusing on single-leg stability and posterior chain</li>
+                    <li><strong>Running Form:</strong> Gradual cadence increases, midfoot striking, reduced overstriding</li>
+                    <li><strong>Surface Variation:</strong> Mix roads, tracks, trails, and treadmills to vary loading patterns</li>
+                    <li><strong>Footwear Rotation:</strong> Use 2-3 different shoe models to vary biomechanical stresses</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ADD: Exercise Physiology Education Section -->
+        <section id="training-science" class="calculator-card" style="margin-bottom: 30px;">
+            <h2>🧬 Exercise Physiology & Running Science</h2>
+            <div style="text-align: left; line-height: 1.7;">
+                <p>Understanding the science behind running performance helps you train more effectively. Our calculators are based on decades of exercise physiology research and proven training methodologies.</p>
+                
+                <h3 style="color: #667eea; margin: 20px 0 10px 0;">The Physiology of Running Performance</h3>
+                <p>Running performance is determined by three key physiological factors:</p>
+                <ul style="margin: 10px 0; padding-left: 25px;">
+                    <li><strong>VO2 Max:</strong> Your maximum oxygen uptake capacity - the engine size</li>
+                    <li><strong>Lactate Threshold:</strong> The pace you can sustain before lactate accumulates - fuel efficiency</li>
+                    <li><strong>Running Economy:</strong> How efficiently you use oxygen at any given pace - mechanical efficiency</li>
+                </ul>
+
+                <h4 style="color: #667eea; margin: 20px 0 10px 0;">Understanding Energy Systems</h4>
+                <p>Your body uses different energy systems for different running intensities:</p>
+                <ul style="margin: 10px 0; padding-left: 25px;">
+                    <li><strong>Aerobic System:</strong> Uses oxygen to produce energy - primary for easy runs and marathons</li>
+                    <li><strong>Lactate System:</strong> Produces energy without oxygen but creates lactate - used in 800m to 10K races</li>
+                    <li><strong>Phosphocreatine System:</strong> Immediate energy for very short, intense efforts - sprints up to 10 seconds</li>
+                </ul>
+
+                <h4 style="color: #667eea; margin: 20px 0 10px 0;">Training Adaptations</h4>
+                <p>Specific training intensities create specific physiological adaptations:</p>
+                <ul style="margin: 10px 0; padding-left: 25px;">
+                    <li><strong>Easy Training:</strong> Increases mitochondrial density, capillary growth, cardiac output</li>
+                    <li><strong>Threshold Training:</strong> Improves lactate buffering and clearance capacity</li>
+                    <li><strong>VO2 Max Training:</strong> Maximizes oxygen uptake and cardiac output</li>
+                    <li><strong>Neuromuscular Training:</strong> Enhances recruitment patterns and power output</li>
+                </ul>
+            </div>
+        </section>
+        
         <!-- Enhanced FAQ Section with Schema -->
         <section class="calculator-card" style="margin-top: 20px;">
             <h2>❓ Frequently Asked Questions - Running Calculator Guide</h2>
@@ -414,16 +569,95 @@
                     <h3 style="color: #667eea; margin-bottom: 8px;">Can beginners use these running calculators?</h3>
                     <p>Absolutely! These <strong>running calculators</strong> are valuable for runners of all levels. Beginners can use them to establish appropriate training paces and avoid overtraining, while experienced runners can fine-tune their training for peak performance.</p>
                 </div>
+
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #667eea; margin-bottom: 8px;">What should my weekly training schedule look like?</h3>
+                    <p>A balanced weekly schedule includes 3-5 easy runs, 1-2 quality workouts (tempo or intervals), 1 long run, and 1-2 rest days. Beginners should start with 3-4 runs per week, while experienced runners may handle 6-7 runs weekly. The key is consistency and gradual progression.</p>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #667eea; margin-bottom: 8px;">How do I prevent running injuries?</h3>
+                    <p>Injury prevention involves gradual training progression (10% rule), strength training 2-3x per week, proper running form, adequate recovery, and listening to your body. Most running injuries result from doing too much too soon, so patience and consistency are crucial.</p>
+                </div>
             </div>
         </section>
 
-        <!-- Running Tips Section -->
-        <section class="calculator-card" style="margin-top: 20px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
-            <h2 style="color: #333;">💡 Expert Running Tips & Training Advice</h2>
-            <div id="running-tip" style="font-size: 16px; line-height: 1.6; color: #444; margin: 15px 0;">
-                <p><strong>Tip:</strong> <span id="tip-text">For optimal performance, aim to do 80% of your training at an easy pace and 20% at higher intensities.</span></p>
+        <!-- ADD: Training Plans Section -->
+        <section id="workout-plans" class="calculator-card" style="margin-bottom: 30px;">
+            <h2>🗓️ Evidence-Based Training Plans</h2>
+            <div style="text-align: left; line-height: 1.7;">
+                <h3 style="color: #667eea; margin-bottom: 15px;">Periodization Principles</h3>
+                <p>Effective training follows periodization - the systematic planning of training loads to optimize performance while preventing overtraining. Our training philosophy incorporates proven periodization models used by elite athletes worldwide.</p>
+
+                <h4 style="color: #667eea; margin: 20px 0 10px 0;">Base Building Phase (8-12 weeks)</h4>
+                <ul style="margin: 10px 0; padding-left: 25px;">
+                    <li><strong>Volume:</strong> Gradually increase weekly mileage following the 10% rule</li>
+                    <li><strong>Intensity:</strong> 80% easy pace, 15% moderate, 5% hard efforts</li>
+                    <li><strong>Key Workouts:</strong> 1 tempo run, 1 long run per week</li>
+                    <li><strong>Focus:</strong> Aerobic development, mitochondrial adaptations, injury prevention</li>
+                </ul>
+
+                <h4 style="color: #667eea; margin: 20px 0 10px 0;">Build Phase (8-12 weeks)</h4>
+                <ul style="margin: 10px 0; padding-left: 25px;">
+                    <li><strong>Volume:</strong> Maintain high aerobic volume while adding quality</li>
+                    <li><strong>Intensity:</strong> 75% easy, 15% moderate, 10% hard</li>
+                    <li><strong>Key Workouts:</strong> 1 tempo run, 1 interval session, 1 long run per week</li>
+                    <li><strong>Focus:</strong> VO2 max development, lactate threshold improvement</li>
+                </ul>
+
+                <h4 style="color: #667eea; margin: 20px 0 10px 0;">Peak/Competition Phase (4-8 weeks)</h4>
+                <ul style="margin: 10px 0; padding-left: 25px;">
+                    <li><strong>Volume:</strong> Reduce total volume by 20-30% while maintaining intensity</li>
+                    <li><strong>Intensity:</strong> Maintain workout intensity with reduced frequency</li>
+                    <li><strong>Key Workouts:</strong> Race pace practice, sharpening sessions</li>
+                    <li><strong>Focus:</strong> Peak fitness, race preparation, nervous system freshness</li>
+                </ul>
+
+                <h4 style="color: #667eea; margin: 20px 0 10px 0;">Sample Weekly Structure (Build Phase)</h4>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                    <p><strong>Monday:</strong> Easy run + strength training (45-60 minutes easy pace)</p>
+                    <p><strong>Tuesday:</strong> VO2 max intervals (warm-up + 4-6 x 3-5 min at I pace + cool-down)</p>
+                    <p><strong>Wednesday:</strong> Easy run (60-75 minutes at E pace)</p>
+                    <p><strong>Thursday:</strong> Tempo run (warm-up + 20-40 min at T pace + cool-down)</p>
+                    <p><strong>Friday:</strong> Easy run or rest (30-45 minutes easy or complete rest)</p>
+                    <p><strong>Saturday:</strong> Easy run + strides (45-60 minutes easy + 4-6 x 100m strides)</p>
+                    <p><strong>Sunday:</strong> Long run (90-180 minutes mostly at E pace, some at M pace)</p>
+                </div>
             </div>
-            <button onclick="getNewTip()" style="background: #667eea; width: auto; padding: 8px 20px;" aria-label="Get new running tip">Get New Training Tip</button>
+        </section>
+
+        <!-- ADD: Scientific References Section -->
+        <section class="calculator-card" style="margin-top: 20px;">
+            <h2>📖 Scientific References & Research Foundation</h2>
+            <div style="text-align: left; line-height: 1.7;">
+                <h3 style="color: #667eea; margin-bottom: 15px;">Research-Based Training Methods</h3>
+                <p>Our training methodologies and calculator formulas are based on decades of peer-reviewed research in exercise physiology, sports science, and performance optimization.</p>
+                
+                <h4 style="color: #667eea; margin: 20px 0 10px 0;">Foundational Research Studies</h4>
+                <ul style="margin: 10px 0; padding-left: 25px;">
+                    <li>Daniels, J. & Gilbert, J. (1979). Oxygen power: Performance tables for distance runners. Oxygen Power.</li>
+                    <li>Laursen, P.B. & Jenkins, D.G. (2002). The scientific basis for high-intensity interval training. Sports Medicine, 32(1), 53-73.</li>
+                    <li>Seiler, S. (2010). What is best practice for training intensity and duration distribution? International Journal of Sports Physiology and Performance, 5(3), 276-291.</li>
+                    <li>Coggan, A.R. & Coyle, E.F. (1991). Reversal of fatigue during prolonged exercise by carbohydrate ingestion. Journal of Applied Physiology, 70(1), 306-313.</li>
+                </ul>
+
+                <h4 style="color: #667eea; margin: 20px 0 10px 0;">Modern Training Science</h4>
+                <ul style="margin: 10px 0; padding-left: 25px;">
+                    <li><strong>Polarized Training:</strong> Seiler's research on intensity distribution in elite endurance athletes</li>
+                    <li><strong>Periodization Models:</strong> Issurin's block periodization vs. traditional linear models</li>
+                    <li><strong>Recovery Science:</strong> Heart rate variability and autonomic nervous system monitoring</li>
+                    <li><strong>Nutritional Timing:</strong> Post-exercise glycogen resynthesis and protein synthesis</li>
+                </ul>
+
+                <h4 style="color: #667eea; margin: 20px 0 10px 0;">Recommended Further Reading</h4>
+                <ul style="margin: 10px 0; padding-left: 25px;">
+                    <li>"Daniels' Running Formula" by Jack Daniels - The gold standard for training intensity</li>
+                    <li>"Advanced Marathoning" by Pete Pfitzinger - Advanced periodization concepts</li>
+                    <li>"The Lore of Running" by Tim Noakes - Comprehensive exercise physiology</li>
+                    <li>"80/20 Running" by Matt Fitzgerald - Evidence for polarized training distribution</li>
+                    <li>"Training and Racing with a Power Meter for Runners" by Jim Vance - Modern power-based training</li>
+                </ul>
+            </div>
         </section>
 
         <!-- Bottom Ad -->
