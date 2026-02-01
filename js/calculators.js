@@ -1,5 +1,5 @@
 // ===== CALCULATORS MODULE =====
-// All calculation logic
+// All calculation logic with engagement flow integration
 
 let paceUnit = 'km';
 let userStats = {};
@@ -38,6 +38,9 @@ function calculateVDOT() {
     const intervalPace = calculatePaceFromVDOT(vdot, 0.95, 0.98);
     const repetitionPace = calculatePaceFromVDOT(vdot, 1.05, 1.20);
     
+    // Get next steps HTML
+    const nextStepsHTML = typeof Engagement !== 'undefined' ? Engagement.generateNextSteps('vdot') : '';
+    
     const resultHTML = `
         <h3>Your VDOT: ${vdot.toFixed(1)}</h3>
         <div class="result-item"><strong>Easy Pace:</strong> ${formatPace(easyPace.min)} - ${formatPace(easyPace.max)} per km</div>
@@ -46,9 +49,15 @@ function calculateVDOT() {
         <div class="result-item"><strong>Interval Pace:</strong> ${formatPace(intervalPace.min)} - ${formatPace(intervalPace.max)} per km</div>
         <div class="result-item"><strong>Repetition Pace:</strong> ${formatPace(repetitionPace.min)} - ${formatPace(repetitionPace.max)} per km</div>
         <button onclick="showShareModal('VDOT Score: ${vdot.toFixed(1)}')" style="margin-top: 15px; background: #4267B2;">Share Results</button>
+        ${nextStepsHTML}
     `;
     
     UI.displayResult('vdot-result', resultHTML);
+    
+    // Mark as completed for engagement tracking
+    if (typeof Engagement !== 'undefined') {
+        Engagement.markCompleted('vdot');
+    }
 }
 
 function calculatePaceFromVDOT(vdot, minPercent, maxPercent) {
@@ -114,6 +123,9 @@ function calculatePace() {
     const speedKmh = (distance / totalSeconds) * 3600;
     const speedMph = speedKmh * 0.621371;
     
+    // Get next steps HTML
+    const nextStepsHTML = typeof Engagement !== 'undefined' ? Engagement.generateNextSteps('pace') : '';
+    
     let resultHTML = `
         <h3>Pace Analysis</h3>
         <div class="result-item"><strong>Pace:</strong> ${paceMinutes}:${paceSecondsRemainder.toString().padStart(2, '0')} per ${paceUnit}</div>
@@ -133,8 +145,14 @@ function calculatePace() {
     }
     
     resultHTML += `<button onclick="showShareModal('Pace: ${paceMinutes}:${paceSecondsRemainder.toString().padStart(2, '0')} per ${paceUnit}')" style="margin-top: 15px; background: #4267B2;">Share Results</button>`;
+    resultHTML += nextStepsHTML;
     
     UI.displayResult('pace-result', resultHTML);
+    
+    // Mark as completed for engagement tracking
+    if (typeof Engagement !== 'undefined') {
+        Engagement.markCompleted('pace');
+    }
 }
 
 // Split Calculator
@@ -193,7 +211,16 @@ function calculateSplits() {
     
     resultHTML += `<div class="result-item" style="margin-top: 15px;"><strong>Total Time:</strong> ${totalTimeStr}</div>`;
     
+    // Get next steps HTML
+    const nextStepsHTML = typeof Engagement !== 'undefined' ? Engagement.generateNextSteps('splits') : '';
+    resultHTML += nextStepsHTML;
+    
     UI.displayResult('split-result', resultHTML);
+    
+    // Mark as completed for engagement tracking
+    if (typeof Engagement !== 'undefined') {
+        Engagement.markCompleted('splits');
+    }
 }
 
 // Heart Rate Zones Calculator
@@ -236,7 +263,16 @@ function calculateHRZones() {
         `;
     });
     
+    // Get next steps HTML
+    const nextStepsHTML = typeof Engagement !== 'undefined' ? Engagement.generateNextSteps('heart_rate_zones') : '';
+    resultHTML += nextStepsHTML;
+    
     UI.displayResult('hr-result', resultHTML);
+    
+    // Mark as completed for engagement tracking
+    if (typeof Engagement !== 'undefined') {
+        Engagement.markCompleted('heart_rate_zones');
+    }
 }
 
 // Race Predictor
@@ -280,7 +316,16 @@ function predictRaceTimes() {
         }
     });
     
+    // Get next steps HTML
+    const nextStepsHTML = typeof Engagement !== 'undefined' ? Engagement.generateNextSteps('race_predictor') : '';
+    resultHTML += nextStepsHTML;
+    
     UI.displayResult('predict-result', resultHTML);
+    
+    // Mark as completed for engagement tracking
+    if (typeof Engagement !== 'undefined') {
+        Engagement.markCompleted('race_predictor');
+    }
 }
 
 // Calorie Calculator
@@ -316,6 +361,9 @@ function calculateCalories() {
     Storage.saveUserStats(userStats);
     UI.updateStatsBar(userStats);
     
+    // Get next steps HTML
+    const nextStepsHTML = typeof Engagement !== 'undefined' ? Engagement.generateNextSteps('calories') : '';
+    
     let resultHTML = `
         <h3>Calorie Burn Estimate</h3>
         <div class="result-item"><strong>Speed:</strong> ${speedKmh.toFixed(1)} km/h</div>
@@ -323,7 +371,13 @@ function calculateCalories() {
         <div class="result-item"><strong>Simple estimate:</strong> ${Math.round(simpleCalories)} calories</div>
         <div class="result-item"><strong>Average:</strong> ${avgCalories} calories</div>
         <button onclick="showShareModal('Burned ${avgCalories} calories in ${distance}km run!')" style="margin-top: 15px; background: #4267B2;">Share Results</button>
+        ${nextStepsHTML}
     `;
     
     UI.displayResult('calorie-result', resultHTML);
+    
+    // Mark as completed for engagement tracking
+    if (typeof Engagement !== 'undefined') {
+        Engagement.markCompleted('calories');
+    }
 }
