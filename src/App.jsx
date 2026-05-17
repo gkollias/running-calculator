@@ -13,6 +13,8 @@ import {
   TweakColor,
 } from './tweaks.jsx';
 import { useDocumentMeta } from './lib/meta.js';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 const TWEAK_DEFAULTS = {
   accent: 'coral',
@@ -415,6 +417,8 @@ export default function App() {
       {routePath === 'contact' && <ContactPage />}
       <Footer navigate={navigate} />
       <PaceTweaks tweaks={tweaks} setTweak={setTweak} />
+      <Analytics />
+      <SpeedInsights />
     </>
   );
 }
