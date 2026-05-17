@@ -46,3 +46,26 @@ test('vo2 page: gender selector switches the delta column', async ({ page }) => 
   // The age-band table is visible with a YOU header.
   await expect(page.getByRole('columnheader', { name: /YOU/ })).toBeVisible();
 });
+
+test('per-tool pages: /vdot loads with VDOT calculator + SEO body', async ({ page }) => {
+  await page.goto('/vdot');
+
+  // H1 contains the target keyword.
+  await expect(page.getByRole('heading', { level: 1, name: /VDOT calculator/i })).toBeVisible();
+
+  // Page title includes the keyword (set by useDocumentMeta).
+  await expect(page).toHaveTitle(/VDOT Calculator/);
+
+  // SEO body is present.
+  await expect(page.getByRole('heading', { level: 2, name: /What is VDOT/i })).toBeVisible();
+
+  // Related-tools links cross-link to peer calculators (there are multiple
+  // pace-calculator links on this page — in-prose and in the related list).
+  await expect(page.getByRole('link', { name: /Pace calculator/i }).first()).toBeVisible();
+});
+
+test('per-tool pages: /heart-rate-zones loads', async ({ page }) => {
+  await page.goto('/heart-rate-zones');
+  await expect(page.getByRole('heading', { level: 1, name: /Heart rate zone calculator/i })).toBeVisible();
+  await expect(page).toHaveTitle(/Heart Rate Zone Calculator/);
+});

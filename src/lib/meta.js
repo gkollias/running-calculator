@@ -39,8 +39,42 @@ export const ROUTE_META = {
       'Bug report, feature request, or feedback on the free running pace, VDOT, splits, heart-rate, and race-prediction calculators.',
     path: '/contact',
   },
-  // Per-tool route meta (pace, splits, hr, predict, calorie, vdot) ships
-  // with the per-tool landing pages in the follow-up commit.
+  pace: {
+    title: 'Pace Calculator — Convert Distance, Time & Running Pace | PACE.',
+    description:
+      'Free pace calculator: convert any two of distance, time, and pace to the third. Switch instantly between km and miles. For training pace and race-day targets.',
+    path: '/pace',
+  },
+  splits: {
+    title: 'Race Splits Calculator — Kilometer & Mile Splits | PACE.',
+    description:
+      'Generate kilometer or mile splits for any target pace and race distance. Print as a race-day cheat sheet so you hit every marker on pace.',
+    path: '/splits',
+  },
+  hr: {
+    title: 'Heart Rate Zone Calculator — % Max & Karvonen | PACE.',
+    description:
+      'Calculate your five training heart-rate zones using either % of max HR or the Karvonen heart-rate-reserve method. Free heart rate zone calculator.',
+    path: '/heart-rate-zones',
+  },
+  predict: {
+    title: 'Race Time Predictor — Riegel Formula | PACE.',
+    description:
+      'Project your time across 1 mile, 5K, 10K, half marathon, and marathon from any race performance using Riegel\'s formula. Free race time predictor.',
+    path: '/race-predictor',
+  },
+  calorie: {
+    title: 'Running Calorie Calculator — MET-based Estimate | PACE.',
+    description:
+      'Estimate calories burned running using MET values weighted with a simple distance-based check. Free running calorie calculator.',
+    path: '/calorie-calculator',
+  },
+  vdot: {
+    title: 'VDOT Calculator — Jack Daniels\' Formula | PACE.',
+    description:
+      'Compute your VDOT score from any race performance using Jack Daniels\' formula. Returns full training paces for Easy, Marathon, Threshold, Interval, and Repetition zones.',
+    path: '/vdot',
+  },
   notfound: {
     title: 'Page Not Found | PACE. Running Pace Calculator',
     description:

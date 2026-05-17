@@ -6,6 +6,14 @@ import { Workspace, Dashboard } from './home.jsx';
 import { ToolsSection } from './tools.jsx';
 import { MarathonPage, VO2Page, ContactPage, GuidePage } from './pages.jsx';
 import {
+  PacePage,
+  SplitsPage,
+  HRPage,
+  PredictPage,
+  CaloriePage,
+  VDOTPage,
+} from './tool-pages.jsx';
+import {
   useTweaks,
   TweaksPanel,
   TweakSection,
@@ -72,9 +80,12 @@ const ROUTE_PATHS = {
   vo2: '/vo2',
   guide: '/guide',
   contact: '/contact',
-  // Per-tool routes (/pace, /splits, /heart-rate-zones, /race-predictor,
-  // /calorie-calculator, /vdot) are added in a follow-up commit alongside
-  // their landing pages so the routing + render-tree are kept in sync.
+  pace: '/pace',
+  splits: '/splits',
+  hr: '/heart-rate-zones',
+  predict: '/race-predictor',
+  calorie: '/calorie-calculator',
+  vdot: '/vdot',
 };
 
 const PATH_TO_ROUTE = Object.fromEntries(
@@ -261,7 +272,7 @@ function Nav({ route, navigate, units, setUnits, theme, setTheme }) {
   );
 }
 
-function HomePage({ units }) {
+function HomePage({ units, navigate }) {
   const [result, setResult] = useState(null);
   const { history, addEntry, clearHistory } = useCalcHistory();
 
@@ -358,7 +369,7 @@ function HomePage({ units }) {
 
       {result && <Dashboard result={result} units={units} />}
 
-      <ToolsSection units={units} />
+      <ToolsSection onNavigate={navigate} />
 
       <section className="trust">
         <div className="shell">
@@ -439,11 +450,12 @@ function Footer({ navigate }) {
           </div>
           <div>
             <h5>Tools</h5>
-            <a href="/" onClick={(e) => { e.preventDefault(); navigate('home'); }}>VDOT</a>
-            <a href="/" onClick={(e) => { e.preventDefault(); navigate('home'); }}>Pace</a>
-            <a href="/" onClick={(e) => { e.preventDefault(); navigate('home'); }}>Splits</a>
-            <a href="/" onClick={(e) => { e.preventDefault(); navigate('home'); }}>Heart rate</a>
-            <a href="/" onClick={(e) => { e.preventDefault(); navigate('home'); }}>Calories</a>
+            <a href="/vdot" onClick={(e) => { e.preventDefault(); navigate('vdot'); }}>VDOT calculator</a>
+            <a href="/pace" onClick={(e) => { e.preventDefault(); navigate('pace'); }}>Pace calculator</a>
+            <a href="/splits" onClick={(e) => { e.preventDefault(); navigate('splits'); }}>Race splits</a>
+            <a href="/heart-rate-zones" onClick={(e) => { e.preventDefault(); navigate('hr'); }}>Heart rate zones</a>
+            <a href="/calorie-calculator" onClick={(e) => { e.preventDefault(); navigate('calorie'); }}>Calorie estimator</a>
+            <a href="/race-predictor" onClick={(e) => { e.preventDefault(); navigate('predict'); }}>Race time predictor</a>
           </div>
           <div>
             <h5>Distances</h5>
@@ -515,7 +527,19 @@ export default function App() {
     applyAccent(typeof tweaks.accent === 'string' ? tweaks.accent : 'coral');
   }, [tweaks.accent]);
 
-  const knownRoutes = ['home', 'marathon', 'vo2', 'guide', 'contact'];
+  const knownRoutes = [
+    'home',
+    'marathon',
+    'vo2',
+    'guide',
+    'contact',
+    'pace',
+    'splits',
+    'hr',
+    'predict',
+    'calorie',
+    'vdot',
+  ];
   const routePath = route.path;
   const metaKey = knownRoutes.includes(routePath) ? routePath : 'notfound';
   useDocumentMeta(metaKey);
@@ -530,11 +554,17 @@ export default function App() {
         theme={tweaks.theme || 'light'}
         setTheme={(t) => setTweak('theme', t)}
       />
-      {routePath === 'home' && <HomePage units={units} />}
+      {routePath === 'home' && <HomePage units={units} navigate={navigate} />}
       {routePath === 'marathon' && <MarathonPage units={units} />}
       {routePath === 'vo2' && <VO2Page />}
       {routePath === 'guide' && <GuidePage />}
       {routePath === 'contact' && <ContactPage />}
+      {routePath === 'pace' && <PacePage units={units} onNavigate={navigate} />}
+      {routePath === 'splits' && <SplitsPage units={units} onNavigate={navigate} />}
+      {routePath === 'hr' && <HRPage onNavigate={navigate} />}
+      {routePath === 'predict' && <PredictPage units={units} onNavigate={navigate} />}
+      {routePath === 'calorie' && <CaloriePage units={units} onNavigate={navigate} />}
+      {routePath === 'vdot' && <VDOTPage onNavigate={navigate} />}
       {metaKey === 'notfound' && <NotFoundPage navigate={navigate} />}
       <Footer navigate={navigate} />
       <PaceTweaks tweaks={tweaks} setTweak={setTweak} />

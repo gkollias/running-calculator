@@ -21,46 +21,52 @@ function UnrealisticNotice({ raceName }) {
   );
 }
 
-const TOOLS = [
+export const TOOLS = [
   {
     id: 'pace',
+    path: '/pace',
     num: '01',
     title: 'Pace calculator',
     desc: 'Convert between distance, time, and pace. Switch between km and miles instantly.',
   },
   {
     id: 'splits',
+    path: '/splits',
     num: '02',
     title: 'Race splits',
     desc: 'Generate kilometer or mile splits for any pace and distance. Print for race day.',
   },
   {
     id: 'hr',
+    path: '/heart-rate-zones',
     num: '03',
     title: 'Heart-rate zones',
     desc: 'Five training zones using either % of max HR or the Karvonen reserve method.',
   },
   {
     id: 'predict',
+    path: '/race-predictor',
     num: '04',
     title: 'Race time predictor',
     desc: "Project your time across 1 mile, 5K, 10K, Half, and Marathon using Riegel's formula.",
   },
   {
     id: 'calorie',
+    path: '/calorie-calculator',
     num: '05',
     title: 'Calorie estimator',
     desc: 'Energy expenditure using MET values, weighted with a simpler distance-based check.',
   },
   {
     id: 'vdot',
+    path: '/vdot',
     num: '06',
     title: 'VDOT calculator',
     desc: 'Compute your VDOT score from any race performance. Returns full training paces.',
   },
 ];
 
-function ToolPace({ units }) {
+export function ToolPace({ units }) {
   const [dist, setDist] = useState(10);
   const [t, setT] = useState({ h: 0, m: 45, s: 0 });
   const total = Calc.parseTime(t.h, t.m, t.s);
@@ -138,7 +144,7 @@ function ToolPace({ units }) {
   );
 }
 
-function ToolSplits({ units }) {
+export function ToolSplits({ units }) {
   const [pace, setPace] = useState({ m: 5, s: 0 });
   const [raceId, setRaceId] = useState('10k');
   const race = Calc.RACES.find((r) => r.id === raceId);
@@ -236,7 +242,7 @@ function ToolSplits({ units }) {
   );
 }
 
-function ToolHR() {
+export function ToolHR() {
   const [max, setMax] = useState(185);
   const [rest, setRest] = useState('');
   const zones = Calc.hrZones(parseInt(max) || 185, parseInt(rest) || null);
@@ -311,7 +317,7 @@ function ToolHR() {
   );
 }
 
-function ToolPredict({ units }) {
+export function ToolPredict({ units }) {
   const [raceId, setRaceId] = useState('10k');
   const [t, setT] = useState(Calc.DEFAULT_TIMES['10k']);
   useEffect(() => {
@@ -420,7 +426,7 @@ function ToolPredict({ units }) {
   );
 }
 
-function ToolCalorie({ units }) {
+export function ToolCalorie({ units }) {
   const [weight, setWeight] = useState(70);
   const [dist, setDist] = useState(10);
   const [mins, setMins] = useState(50);
@@ -497,7 +503,7 @@ function ToolCalorie({ units }) {
   );
 }
 
-function ToolVDOT() {
+export function ToolVDOT() {
   const [raceId, setRaceId] = useState('5k');
   const [t, setT] = useState(Calc.DEFAULT_TIMES['5k']);
   useEffect(() => {
@@ -588,28 +594,9 @@ function ToolVDOT() {
   );
 }
 
-export function ToolsSection({ units }) {
-  const [open, setOpen] = useState(null);
-
-  const renderTool = (id) => {
-    switch (id) {
-      case 'pace':
-        return <ToolPace units={units} />;
-      case 'splits':
-        return <ToolSplits units={units} />;
-      case 'hr':
-        return <ToolHR />;
-      case 'predict':
-        return <ToolPredict units={units} />;
-      case 'calorie':
-        return <ToolCalorie units={units} />;
-      case 'vdot':
-        return <ToolVDOT />;
-      default:
-        return null;
-    }
-  };
-
+// Home-page tool grid now links out to each tool's own page rather than
+// opening inline. Each tool ranks against its own URL.
+export function ToolsSection({ onNavigate }) {
   return (
     <section className="tools" id="tools">
       <div className="shell">
@@ -623,52 +610,35 @@ export function ToolsSection({ units }) {
             </h2>
           </div>
           <div className="sub">
-            All six original tools, redesigned and consistent. Use them on their own,
-            or just enter a race up top and they fill in automatically.
+            All six tools, redesigned and consistent. Each has its own page —
+            use them on their own, or just enter a race up top and the full
+            dashboard fills in automatically.
           </div>
         </div>
 
-        {open ? (
-          <div style={{ position: 'relative' }}>
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'baseline',
-                marginBottom: 14,
+        <div className="tools-grid">
+          {TOOLS.map((t) => (
+            <a
+              key={t.id}
+              className="tool-card"
+              href={t.path}
+              onClick={(e) => {
+                if (onNavigate) {
+                  e.preventDefault();
+                  onNavigate(t.id);
+                }
               }}
             >
-              <h3
-                style={{
-                  fontFamily: 'var(--display)',
-                  fontSize: 34,
-                  letterSpacing: '-0.02em',
-                  fontWeight: 400,
-                }}
-              >
-                {TOOLS.find((t) => t.id === open).title}
-              </h3>
-              <button className="btn-ghost" onClick={() => setOpen(null)}>
-                ← All tools
-              </button>
-            </div>
-            {renderTool(open)}
-          </div>
-        ) : (
-          <div className="tools-grid">
-            {TOOLS.map((t) => (
-              <button key={t.id} className="tool-card" onClick={() => setOpen(t.id)}>
-                <div className="num">{t.num} · TOOL</div>
-                <h3>{t.title}</h3>
-                <p>{t.desc}</p>
-                <div className="open">
-                  <span>Open</span>
-                  <span className="arrow">→</span>
-                </div>
-              </button>
-            ))}
-          </div>
-        )}
+              <div className="num">{t.num} · TOOL</div>
+              <h3>{t.title}</h3>
+              <p>{t.desc}</p>
+              <div className="open">
+                <span>Open</span>
+                <span className="arrow">→</span>
+              </div>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   );
