@@ -1,0 +1,31 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/vo2-max-calculator.html",
+      "destination": "/vo2",
+      "permanent": true
+    },
+    {
+      "source": "/marathon-pace-calculator.html",
+      "destination": "/marathon",
+      "permanent": true
+    },
+    {
+      "source": "/contact.html",
+      "destination": "/contact",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/((?!api/|_next/|assets/|favicon\\.svg|robots\\.txt|sitemap\\.xml|ads\\.txt|manifest\\.webmanifest|registerSW\\.js|sw\\.js|workbox-.*|og-image\\.png|apple-touch-icon\\.png).*)",
+      "destination": "/"
+    }
+  ]
+}
