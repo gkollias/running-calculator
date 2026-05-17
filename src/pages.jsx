@@ -569,8 +569,41 @@ export function VO2Page() {
   );
 }
 
+const FORMSPREE_URL = 'https://formspree.io/f/xbdzvold';
+
 export function ContactPage() {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('sending');
+    setErrorMsg(null);
+    try {
+      const res = await fetch(FORMSPREE_URL, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(e.currentTarget),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        const msg =
+          data?.errors?.map((x) => x.message).join(', ') ||
+          `Send failed (status ${res.status}).`;
+        setErrorMsg(msg);
+        setStatus('error');
+        return;
+      }
+      setStatus('sent');
+    } catch (err) {
+      setErrorMsg('Network error. Check your connection and try again.');
+      setStatus('error');
+    }
+  };
+
+  const sent = status === 'sent';
+  const sending = status === 'sending';
+
   return (
     <main>
       <section className="hero">
@@ -600,22 +633,23 @@ export function ContactPage() {
                 </div>
               </div>
             ) : (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setSent(true);
-                }}
-              >
+              <form onSubmit={onSubmit}>
                 <div className="field" style={{ marginBottom: 18 }}>
                   <label>Your email</label>
                   <div className="control">
-                    <input type="email" required placeholder="you@example.com" />
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      placeholder="you@example.com"
+                      disabled={sending}
+                    />
                   </div>
                 </div>
                 <div className="field" style={{ marginBottom: 18 }}>
                   <label>What's up?</label>
                   <div className="control">
-                    <select required defaultValue="">
+                    <select name="topic" required defaultValue="" disabled={sending}>
                       <option value="" disabled>
                         Pick one
                       </option>
@@ -630,8 +664,10 @@ export function ContactPage() {
                   <label>Message</label>
                   <div className="control" style={{ padding: 4 }}>
                     <textarea
+                      name="message"
                       required
                       rows="5"
+                      disabled={sending}
                       style={{
                         background: 'transparent',
                         border: 0,
@@ -647,8 +683,25 @@ export function ContactPage() {
                     ></textarea>
                   </div>
                 </div>
-                <button type="submit" className="btn-primary">
-                  Send message <span className="arrow">→</span>
+                {errorMsg && (
+                  <div
+                    role="alert"
+                    style={{
+                      marginBottom: 16,
+                      padding: '10px 14px',
+                      background: 'var(--accent-soft)',
+                      color: 'var(--accent-ink)',
+                      border: '1px solid var(--accent-line)',
+                      borderRadius: 10,
+                      fontSize: 13,
+                    }}
+                  >
+                    {errorMsg}
+                  </div>
+                )}
+                <button type="submit" className="btn-primary" disabled={sending}>
+                  {sending ? 'Sending…' : 'Send message'}{' '}
+                  {!sending && <span className="arrow">→</span>}
                 </button>
               </form>
             )}
