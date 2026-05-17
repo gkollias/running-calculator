@@ -1,6 +1,6 @@
 // Home: goal-driven workspace + results dashboard.
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Calc } from './lib/calc.js';
 
 function TimeInput({ value, onChange, includeHours = true }) {
@@ -536,6 +536,16 @@ export function Dashboard({ result, units }) {
   const vo2 = Calc.vo2Max(race.meters, totalSeconds);
   const cal = Calc.calories(weight, race.meters / 1000, totalSeconds / 60);
 
+  // Move focus + screen-reader attention to the freshly-rendered dashboard.
+  // The h2 is tabIndex={-1} so we can focus it programmatically without
+  // adding it to the natural tab order.
+  const headingRef = useRef(null);
+  useEffect(() => {
+    if (headingRef.current) {
+      headingRef.current.focus({ preventScroll: false });
+    }
+  }, [race.id, totalSeconds]);
+
   const print = () => window.print();
   const share = () => {
     const url = new URL(window.location.href);
@@ -552,14 +562,16 @@ export function Dashboard({ result, units }) {
   };
 
   return (
-    <section className="dashboard fade-in">
+    <section className="dashboard fade-in" aria-live="polite">
       <div className="shell">
         <div className="dash-head">
           <div>
             <div className="meta">
               Results · {race.name} in {Calc.fmtTime(totalSeconds)}
             </div>
-            <h2 style={{ marginTop: 8 }}>Here's the plan.</h2>
+            <h2 ref={headingRef} tabIndex={-1} style={{ marginTop: 8, outline: 'none' }}>
+              Here's the plan.
+            </h2>
           </div>
           <div className="dash-actions">
             <button className="btn-ghost" id="share-btn" onClick={share}>

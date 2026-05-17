@@ -137,16 +137,20 @@ function Nav({ route, navigate, units, setUnits, theme, setTheme }) {
           ))}
         </div>
         <div className="nav-tools">
-          <div className="unit-pill" role="group" aria-label="units">
+          <div className="unit-pill" role="group" aria-label="Distance units">
             <button
               className={units === 'km' ? 'on' : ''}
               onClick={() => setUnits('km')}
+              aria-pressed={units === 'km'}
+              aria-label="Kilometers"
             >
               KM
             </button>
             <button
               className={units === 'mi' ? 'on' : ''}
               onClick={() => setUnits('mi')}
+              aria-pressed={units === 'mi'}
+              aria-label="Miles"
             >
               MI
             </button>
@@ -154,7 +158,8 @@ function Nav({ route, navigate, units, setUnits, theme, setTheme }) {
           <button
             className="icon-btn"
             onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-            aria-label="theme"
+            aria-label={theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'}
+            title={theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'}
           >
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
               {theme === 'light' ? (
@@ -176,7 +181,8 @@ function Nav({ route, navigate, units, setUnits, theme, setTheme }) {
           <button
             className="icon-btn nav-mobile-toggle"
             onClick={() => setMOpen(!mOpen)}
-            aria-label="menu"
+            aria-label={mOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={mOpen}
           >
             <svg
               width="14"
