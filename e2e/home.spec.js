@@ -38,7 +38,7 @@ test('home: an unrealistic time is blocked by the WR floor', async ({ page }) =>
 });
 
 test('vo2 page: gender selector switches the delta column', async ({ page }) => {
-  await page.goto('/#/vo2');
+  await page.goto('/vo2');
 
   // Switch reference to "Compare vs men" so the YOU column populates.
   await page.getByLabel(/Reference/).selectOption('men');

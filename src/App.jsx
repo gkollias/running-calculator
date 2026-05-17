@@ -63,32 +63,60 @@ function applyAccent(name) {
   root.style.setProperty('--accent-ink', a.ink);
 }
 
-function parseHash(hash) {
-  const h = (hash || '').replace(/^#\/?/, '');
-  const [path, query = ''] = h.split('?');
+// Map URL path segments to internal route keys.
+// Keys are short names used in navigate() calls and to drive what page renders;
+// paths are what shows up in the browser address bar.
+const ROUTE_PATHS = {
+  home: '/',
+  marathon: '/marathon',
+  vo2: '/vo2',
+  guide: '/guide',
+  contact: '/contact',
+  // Per-tool routes (/pace, /splits, /heart-rate-zones, /race-predictor,
+  // /calorie-calculator, /vdot) are added in a follow-up commit alongside
+  // their landing pages so the routing + render-tree are kept in sync.
+};
+
+const PATH_TO_ROUTE = Object.fromEntries(
+  Object.entries(ROUTE_PATHS).map(([k, v]) => [v, k])
+);
+
+function parsePath(pathname, search) {
+  const clean = pathname.replace(/\/+$/, '') || '/';
+  const path = PATH_TO_ROUTE[clean] || 'unknown';
   const params = {};
-  query.split('&').forEach((p) => {
-    const [k, v] = p.split('=');
-    if (k) params[k] = decodeURIComponent(v || '');
+  new URLSearchParams(search || '').forEach((v, k) => {
+    params[k] = v;
   });
-  return { path: path || 'home', params };
+  return { path, params };
 }
 
 function useRoute() {
-  const [route, setRoute] = useState(() => parseHash(window.location.hash));
+  const [route, setRoute] = useState(() =>
+    parsePath(window.location.pathname, window.location.search)
+  );
   useEffect(() => {
-    const onHash = () => setRoute(parseHash(window.location.hash));
-    window.addEventListener('hashchange', onHash);
-    return () => window.removeEventListener('hashchange', onHash);
+    const onPop = () =>
+      setRoute(parsePath(window.location.pathname, window.location.search));
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
   }, []);
-  return [route, (path) => { window.location.hash = path; }];
+  const navigate = (nameOrPath) => {
+    // Accept either a route key ("marathon") or a literal path ("/marathon").
+    const path = ROUTE_PATHS[nameOrPath] || nameOrPath;
+    if (path === window.location.pathname + window.location.search) return;
+    window.history.pushState(null, '', path);
+    setRoute(parsePath(path.split('?')[0], path.split('?')[1] || ''));
+    window.scrollTo(0, 0);
+  };
+  return [route, navigate];
 }
 
 function Brand({ onClick }) {
   return (
     <a
       className="brand"
-      href="#/"
+      href="/"
       onClick={(e) => {
         e.preventDefault();
         onClick('home');
@@ -126,7 +154,7 @@ function Nav({ route, navigate, units, setUnits, theme, setTheme }) {
           {links.map((l) => (
             <a
               key={l.id}
-              href={'#/' + l.id}
+              href={ROUTE_PATHS[l.id] || '/'}
               className={'nav-link' + (route.path === l.id ? ' active' : '')}
               onClick={(e) => {
                 e.preventDefault();
@@ -216,7 +244,7 @@ function Nav({ route, navigate, units, setUnits, theme, setTheme }) {
           {links.map((l) => (
             <a
               key={l.id}
-              href={'#/' + l.id}
+              href={ROUTE_PATHS[l.id] || '/'}
               className={'nav-link' + (route.path === l.id ? ' active' : '')}
               onClick={(e) => {
                 e.preventDefault();
@@ -238,15 +266,20 @@ function HomePage({ units }) {
   const { history, addEntry, clearHistory } = useCalcHistory();
 
   useEffect(() => {
-    const { path, params } = parseHash(window.location.hash);
-    if (path === 'results' && params.race && params.t) {
-      const race = Calc.RACES.find((r) => r.id === params.race);
+    // Rehydrate the dashboard from query params on home: /?race=10k&t=2700
+    // Used by the "Copy share link" button below; keeps shared URLs working
+    // across browsers and after a refresh.
+    const params = new URLSearchParams(window.location.search);
+    const raceId = params.get('race');
+    const t = params.get('t');
+    if (raceId && t) {
+      const race = Calc.RACES.find((r) => r.id === raceId);
       if (race)
         setResult({
           race,
-          totalSeconds: parseInt(params.t),
-          maxHR: params.hr ? parseInt(params.hr) : null,
-          weight: params.w ? parseFloat(params.w) : 70,
+          totalSeconds: parseInt(t),
+          maxHR: params.get('hr') ? parseInt(params.get('hr')) : null,
+          weight: params.get('w') ? parseFloat(params.get('w')) : 70,
         });
     }
   }, []);
@@ -406,22 +439,22 @@ function Footer({ navigate }) {
           </div>
           <div>
             <h5>Tools</h5>
-            <a href="#/home" onClick={(e) => { e.preventDefault(); navigate('home'); }}>VDOT</a>
-            <a href="#/home" onClick={(e) => { e.preventDefault(); navigate('home'); }}>Pace</a>
-            <a href="#/home" onClick={(e) => { e.preventDefault(); navigate('home'); }}>Splits</a>
-            <a href="#/home" onClick={(e) => { e.preventDefault(); navigate('home'); }}>Heart rate</a>
-            <a href="#/home" onClick={(e) => { e.preventDefault(); navigate('home'); }}>Calories</a>
+            <a href="/" onClick={(e) => { e.preventDefault(); navigate('home'); }}>VDOT</a>
+            <a href="/" onClick={(e) => { e.preventDefault(); navigate('home'); }}>Pace</a>
+            <a href="/" onClick={(e) => { e.preventDefault(); navigate('home'); }}>Splits</a>
+            <a href="/" onClick={(e) => { e.preventDefault(); navigate('home'); }}>Heart rate</a>
+            <a href="/" onClick={(e) => { e.preventDefault(); navigate('home'); }}>Calories</a>
           </div>
           <div>
             <h5>Distances</h5>
-            <a href="#/marathon" onClick={(e) => { e.preventDefault(); navigate('marathon'); }}>Marathon</a>
-            <a href="#/vo2" onClick={(e) => { e.preventDefault(); navigate('vo2'); }}>VO₂ Max</a>
-            <a href="#/guide" onClick={(e) => { e.preventDefault(); navigate('guide'); }}>Training guide</a>
+            <a href="/marathon" onClick={(e) => { e.preventDefault(); navigate('marathon'); }}>Marathon pace</a>
+            <a href="/vo2" onClick={(e) => { e.preventDefault(); navigate('vo2'); }}>VO₂ Max</a>
+            <a href="/guide" onClick={(e) => { e.preventDefault(); navigate('guide'); }}>Training guide</a>
           </div>
           <div>
             <h5>About</h5>
-            <a href="#/contact" onClick={(e) => { e.preventDefault(); navigate('contact'); }}>Contact</a>
-            <a href="#/guide" onClick={(e) => { e.preventDefault(); navigate('guide'); }}>The guide</a>
+            <a href="/contact" onClick={(e) => { e.preventDefault(); navigate('contact'); }}>Contact</a>
+            <a href="/guide" onClick={(e) => { e.preventDefault(); navigate('guide'); }}>The guide</a>
             <a href="#">Privacy</a>
             <a href="#">Terms</a>
           </div>
@@ -483,7 +516,7 @@ export default function App() {
   }, [tweaks.accent]);
 
   const knownRoutes = ['home', 'marathon', 'vo2', 'guide', 'contact'];
-  const routePath = route.path === 'results' ? 'home' : route.path;
+  const routePath = route.path;
   const metaKey = knownRoutes.includes(routePath) ? routePath : 'notfound';
   useDocumentMeta(metaKey);
 

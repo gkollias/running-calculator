@@ -553,8 +553,11 @@ export function Dashboard({ result, units }) {
 
   const print = () => window.print();
   const share = () => {
-    const url = new URL(window.location.href);
-    url.hash = `/results?race=${race.id}&t=${totalSeconds}&hr=${maxHR || ''}&w=${weight}`;
+    const url = new URL(window.location.origin + '/');
+    url.searchParams.set('race', race.id);
+    url.searchParams.set('t', String(totalSeconds));
+    if (maxHR) url.searchParams.set('hr', String(maxHR));
+    url.searchParams.set('w', String(weight));
     navigator.clipboard?.writeText(url.toString());
     const btn = document.getElementById('share-btn');
     if (btn) {

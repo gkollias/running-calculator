@@ -19,26 +19,28 @@ export const ROUTE_META = {
     title: 'Marathon Pace Calculator & Pacing Strategy | PACE.',
     description:
       'Plan your marathon pace, get every-5K splits, see the required pace for any goal time, and benchmark your target. Free marathon pace calculator with negative-split strategy.',
-    path: '/#/marathon',
+    path: '/marathon',
   },
   vo2: {
     title: 'VO₂ Max Calculator from Race Performance | PACE.',
     description:
       'Estimate your VO₂ max from a 5K, 10K, half, or marathon time. Free VO₂ max calculator using Daniels\' formula, with age-graded reference values.',
-    path: '/#/vo2',
+    path: '/vo2',
   },
   guide: {
     title: 'Running Training Guide — VDOT, Pace Zones & Riegel | PACE.',
     description:
       'How VDOT, Riegel race predictions, Karvonen heart-rate zones, and the 80/20 training rule work. The science behind every running calculator, explained.',
-    path: '/#/guide',
+    path: '/guide',
   },
   contact: {
     title: 'Contact PACE. — Free Running Calculators',
     description:
       'Bug report, feature request, or feedback on the free running pace, VDOT, splits, heart-rate, and race-prediction calculators.',
-    path: '/#/contact',
+    path: '/contact',
   },
+  // Per-tool route meta (pace, splits, hr, predict, calorie, vdot) ships
+  // with the per-tool landing pages in the follow-up commit.
   notfound: {
     title: 'Page Not Found | PACE. Running Pace Calculator',
     description:

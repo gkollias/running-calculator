@@ -8,28 +8,24 @@
     },
     {
       "source": "/vo2-max-calculator.html",
-      "destination": "/#/vo2",
+      "destination": "/vo2",
       "permanent": true
     },
     {
       "source": "/marathon-pace-calculator.html",
-      "destination": "/#/marathon",
+      "destination": "/marathon",
       "permanent": true
     },
     {
       "source": "/contact.html",
-      "destination": "/#/contact",
+      "destination": "/contact",
       "permanent": true
-    },
+    }
+  ],
+  "rewrites": [
     {
-      "source": "/privacy-policy.html",
-      "destination": "/legacy/privacy-policy.html",
-      "permanent": false
-    },
-    {
-      "source": "/terms-of-use.html",
-      "destination": "/legacy/terms-of-use.html",
-      "permanent": false
+      "source": "/((?!api/|_next/|assets/|favicon\\.svg|robots\\.txt|sitemap\\.xml|ads\\.txt|manifest\\.webmanifest|registerSW\\.js|sw\\.js|workbox-.*|og-image\\.png|apple-touch-icon\\.png).*)",
+      "destination": "/"
     }
   ]
 }
