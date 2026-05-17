@@ -1,6 +1,6 @@
 // Secondary pages: Marathon, VO₂ Max, Contact, Guide.
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Calc } from './lib/calc.js';
 
 export function MarathonPage({ units }) {
@@ -331,11 +331,16 @@ export function MarathonPage({ units }) {
 
 export function VO2Page() {
   const [raceId, setRaceId] = useState('5k');
-  const [t, setT] = useState({ h: 0, m: 22, s: 0 });
+  const [t, setT] = useState(Calc.DEFAULT_TIMES['5k']);
+  const [gender, setGender] = useState('unspecified');
+  useEffect(() => {
+    setT(Calc.DEFAULT_TIMES[raceId] || { h: 0, m: 0, s: 0 });
+  }, [raceId]);
   const race = Calc.RACES.find((r) => r.id === raceId);
   const total = Calc.parseTime(t.h, t.m, t.s);
-  const vo2 = total > 0 ? Calc.vo2Max(race.meters, total) : 0;
-  const vdot = total > 0 ? Calc.vdotFromRace(race.meters, total) : 0;
+  const realistic = Calc.isTimeRealistic(raceId, total);
+  const vo2 = total > 0 && realistic ? Calc.vo2Max(race.meters, total) : 0;
+  const vdot = total > 0 && realistic ? Calc.vdotFromRace(race.meters, total) : 0;
 
   const ageBands = [
     { age: '20-29', men: 48, women: 41 },
@@ -403,7 +408,33 @@ export function VO2Page() {
                 />
               </div>
             </div>
+            <div className="field">
+              <label>Reference</label>
+              <div className="control">
+                <select value={gender} onChange={(e) => setGender(e.target.value)}>
+                  <option value="unspecified">Show both</option>
+                  <option value="men">Compare vs men</option>
+                  <option value="women">Compare vs women</option>
+                </select>
+              </div>
+            </div>
           </div>
+          {total > 0 && !realistic && (
+            <div
+              role="alert"
+              style={{
+                marginTop: 14,
+                padding: '10px 14px',
+                background: 'var(--accent-soft)',
+                color: 'var(--accent-ink)',
+                border: '1px solid var(--accent-line)',
+                borderRadius: 10,
+                fontSize: 13,
+              }}
+            >
+              That's faster than the world record for {race.name}. Enter a more realistic time.
+            </div>
+          )}
         </div>
       </section>
 
@@ -509,55 +540,67 @@ export function VO2Page() {
                     </tr>
                   </thead>
                   <tbody>
-                    {ageBands.map((b) => (
-                      <tr key={b.age} style={{ borderBottom: '1px solid var(--line)' }}>
-                        <td
-                          style={{
-                            padding: '14px 8px',
-                            fontFamily: 'var(--display)',
-                            fontSize: 20,
-                          }}
-                        >
-                          {b.age}
-                        </td>
-                        <td
-                          style={{
-                            padding: '14px 8px',
-                            textAlign: 'right',
-                            fontFamily: 'var(--mono)',
-                            fontVariantNumeric: 'tabular-nums',
-                          }}
-                        >
-                          {b.men.toFixed(1)}
-                        </td>
-                        <td
-                          style={{
-                            padding: '14px 8px',
-                            textAlign: 'right',
-                            fontFamily: 'var(--mono)',
-                            fontVariantNumeric: 'tabular-nums',
-                          }}
-                        >
-                          {b.women.toFixed(1)}
-                        </td>
-                        <td
-                          style={{
-                            padding: '14px 8px',
-                            textAlign: 'right',
-                            fontFamily: 'var(--mono)',
-                            fontWeight: 600,
-                            color: vo2 > b.men ? 'var(--accent)' : 'var(--muted)',
-                            fontVariantNumeric: 'tabular-nums',
-                          }}
-                        >
-                          {vo2 > b.men
-                            ? `+${(vo2 - b.men).toFixed(1)}`
-                            : vo2 > 0
-                            ? `${(vo2 - b.men).toFixed(1)}`
-                            : '—'}
-                        </td>
-                      </tr>
-                    ))}
+                    {ageBands.map((b) => {
+                      const ref =
+                        gender === 'men' ? b.men : gender === 'women' ? b.women : null;
+                      const delta = vo2 > 0 && ref != null ? vo2 - ref : null;
+                      const deltaText =
+                        delta == null
+                          ? '—'
+                          : delta >= 0
+                          ? `+${delta.toFixed(1)}`
+                          : delta.toFixed(1);
+                      return (
+                        <tr key={b.age} style={{ borderBottom: '1px solid var(--line)' }}>
+                          <td
+                            style={{
+                              padding: '14px 8px',
+                              fontFamily: 'var(--display)',
+                              fontSize: 20,
+                            }}
+                          >
+                            {b.age}
+                          </td>
+                          <td
+                            style={{
+                              padding: '14px 8px',
+                              textAlign: 'right',
+                              fontFamily: 'var(--mono)',
+                              fontVariantNumeric: 'tabular-nums',
+                              fontWeight: gender === 'men' ? 600 : 400,
+                            }}
+                          >
+                            {b.men.toFixed(1)}
+                          </td>
+                          <td
+                            style={{
+                              padding: '14px 8px',
+                              textAlign: 'right',
+                              fontFamily: 'var(--mono)',
+                              fontVariantNumeric: 'tabular-nums',
+                              fontWeight: gender === 'women' ? 600 : 400,
+                            }}
+                          >
+                            {b.women.toFixed(1)}
+                          </td>
+                          <td
+                            style={{
+                              padding: '14px 8px',
+                              textAlign: 'right',
+                              fontFamily: 'var(--mono)',
+                              fontWeight: 600,
+                              color:
+                                delta != null && delta >= 0
+                                  ? 'var(--accent)'
+                                  : 'var(--muted)',
+                              fontVariantNumeric: 'tabular-nums',
+                            }}
+                          >
+                            {deltaText}
+                          </td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>

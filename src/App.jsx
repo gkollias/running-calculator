@@ -297,6 +297,39 @@ function HomePage({ units }) {
   );
 }
 
+function NotFoundPage({ navigate }) {
+  return (
+    <main>
+      <section className="hero">
+        <div className="shell">
+          <div className="kicker">404 · Page not found</div>
+          <h1>
+            That route <em>doesn't exist</em>.
+          </h1>
+          <p className="lede">
+            The page you were looking for isn't here. It may have moved, or you
+            may have followed a stale link.
+          </p>
+          <div style={{ marginTop: 28, display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <button
+              className="btn-primary"
+              onClick={() => navigate('home')}
+            >
+              Back to home <span className="arrow">→</span>
+            </button>
+            <button
+              className="btn-ghost"
+              onClick={() => navigate('guide')}
+            >
+              Training guide
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
 function Footer({ navigate }) {
   return (
     <footer>
@@ -407,6 +440,7 @@ export default function App() {
       {routePath === 'vo2' && <VO2Page />}
       {routePath === 'guide' && <GuidePage />}
       {routePath === 'contact' && <ContactPage />}
+      {metaKey === 'notfound' && <NotFoundPage navigate={navigate} />}
       <Footer navigate={navigate} />
       <PaceTweaks tweaks={tweaks} setTweak={setTweak} />
       <Analytics />
