@@ -85,9 +85,14 @@ export function Workspace({ onCompute }) {
       <div className="shell">
         <div className="input-row">
           <div className="field">
-            <label>Recent race or training target</label>
+            <label htmlFor="workspace-race">Recent race or training target</label>
             <div className="control">
-              <select value={raceId} onChange={(e) => setRaceId(e.target.value)}>
+              <select
+                id="workspace-race"
+                aria-label="Recent race or training target"
+                value={raceId}
+                onChange={(e) => setRaceId(e.target.value)}
+              >
                 {Calc.RACES.map((r) => (
                   <option key={r.id} value={r.id}>
                     {r.name}

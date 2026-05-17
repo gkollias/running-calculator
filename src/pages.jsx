@@ -370,9 +370,14 @@ export function VO2Page() {
         <div className="shell">
           <div className="input-row">
             <div className="field">
-              <label>Recent race</label>
+              <label htmlFor="vo2-race">Recent race</label>
               <div className="control">
-                <select value={raceId} onChange={(e) => setRaceId(e.target.value)}>
+                <select
+                  id="vo2-race"
+                  aria-label="Recent race"
+                  value={raceId}
+                  onChange={(e) => setRaceId(e.target.value)}
+                >
                   {Calc.RACES.map((r) => (
                     <option key={r.id} value={r.id}>
                       {r.name}
@@ -387,6 +392,7 @@ export function VO2Page() {
                 <input
                   type="number"
                   min="0"
+                  aria-label="hours"
                   value={t.h}
                   onChange={(e) => setT({ ...t, h: e.target.value })}
                 />
@@ -395,6 +401,7 @@ export function VO2Page() {
                   type="number"
                   min="0"
                   max="59"
+                  aria-label="minutes"
                   value={t.m}
                   onChange={(e) => setT({ ...t, m: e.target.value })}
                 />
@@ -403,15 +410,21 @@ export function VO2Page() {
                   type="number"
                   min="0"
                   max="59"
+                  aria-label="seconds"
                   value={t.s}
                   onChange={(e) => setT({ ...t, s: e.target.value })}
                 />
               </div>
             </div>
             <div className="field">
-              <label>Reference</label>
+              <label htmlFor="vo2-reference">Reference</label>
               <div className="control">
-                <select value={gender} onChange={(e) => setGender(e.target.value)}>
+                <select
+                  id="vo2-reference"
+                  aria-label="Reference"
+                  value={gender}
+                  onChange={(e) => setGender(e.target.value)}
+                >
                   <option value="unspecified">Show both</option>
                   <option value="men">Compare vs men</option>
                   <option value="women">Compare vs women</option>
