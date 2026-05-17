@@ -1,0 +1,254 @@
+/* ===== ENGAGEMENT FEATURES CSS ===== */
+
+/* Sticky Calculator Navigation */
+#sticky-calc-nav {
+    position: fixed;
+    bottom: -70px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    transition: bottom 0.3s ease;
+}
+
+#sticky-calc-nav.visible {
+    bottom: 20px;
+}
+
+.sticky-nav-inner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 10px 16px;
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(102, 126, 234, 0.1);
+}
+
+.sticky-nav-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #667eea;
+    margin-right: 4px;
+}
+
+#sticky-calc-nav button {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 2px solid transparent;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#sticky-calc-nav button:hover {
+    transform: scale(1.15);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: white;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* Card Highlight Animation */
+.calculator-card.highlight-card {
+    animation: highlightPulse 1.5s ease;
+}
+
+@keyframes highlightPulse {
+    0% {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    25% {
+        box-shadow: 0 10px 40px rgba(102, 126, 234, 0.5), 0 0 0 4px rgba(102, 126, 234, 0.2);
+    }
+    50% {
+        box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3), 0 0 0 2px rgba(102, 126, 234, 0.1);
+    }
+    100% {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+}
+
+/* Next Steps Section */
+.next-steps {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px dashed #e0e0e0;
+}
+
+.next-steps-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #667eea;
+    margin-bottom: 12px;
+}
+
+.next-steps-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.next-step-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    flex: 1;
+    min-width: 200px;
+    border: none;
+    margin: 0;
+}
+
+.next-step-btn.primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.next-step-btn.secondary {
+    background: #f8f9fa;
+    color: #333;
+    border: 2px solid #e0e0e0;
+}
+
+.next-step-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+}
+
+.next-step-btn.secondary:hover {
+    border-color: #667eea;
+    background: white;
+}
+
+.next-step-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.next-step-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.next-step-text strong {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.next-step-text small {
+    font-size: 12px;
+    opacity: 0.85;
+}
+
+/* Milestone Notification */
+.milestone-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 16px 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
+    z-index: 10001;
+    max-width: 320px;
+    animation: slideInRight 0.4s ease;
+}
+
+.milestone-notification p {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.milestone-notification button {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: auto;
+    margin: 0;
+}
+
+.milestone-notification button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: none;
+    box-shadow: none;
+}
+
+.milestone-notification.fade-out {
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.3s ease;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    #sticky-calc-nav {
+        bottom: -60px;
+        width: calc(100% - 20px);
+        left: 10px;
+        transform: none;
+    }
+
+    #sticky-calc-nav.visible {
+        bottom: 10px;
+    }
+
+    .sticky-nav-inner {
+        justify-content: center;
+        padding: 8px 12px;
+        gap: 6px;
+    }
+
+    .sticky-nav-label {
+        display: none;
+    }
+
+    #sticky-calc-nav button {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+
+    .next-steps-buttons {
+        flex-direction: column;
+    }
+
+    .next-step-btn {
+        min-width: 100%;
+    }
+
+    .milestone-notification {
+        left: 10px;
+        right: 10px;
+        max-width: none;
+    }
+}
