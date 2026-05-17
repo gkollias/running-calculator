@@ -1,7 +1,25 @@
 // Standalone tools section + tool detail panels.
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Calc } from './lib/calc.js';
+
+function UnrealisticNotice({ raceName }) {
+  return (
+    <div
+      role="alert"
+      style={{
+        padding: '10px 14px',
+        background: 'var(--accent-soft)',
+        color: 'var(--accent-ink)',
+        border: '1px solid var(--accent-line)',
+        borderRadius: 10,
+        fontSize: 13,
+      }}
+    >
+      That's faster than the world record for {raceName}. Enter a more realistic time.
+    </div>
+  );
+}
 
 const TOOLS = [
   {
@@ -295,10 +313,14 @@ function ToolHR() {
 
 function ToolPredict({ units }) {
   const [raceId, setRaceId] = useState('10k');
-  const [t, setT] = useState({ h: 0, m: 45, s: 0 });
+  const [t, setT] = useState(Calc.DEFAULT_TIMES['10k']);
+  useEffect(() => {
+    setT(Calc.DEFAULT_TIMES[raceId] || { h: 0, m: 0, s: 0 });
+  }, [raceId]);
   const race = Calc.RACES.find((r) => r.id === raceId);
   const total = Calc.parseTime(t.h, t.m, t.s);
-  const preds = total > 0 ? Calc.predictAll(race.meters, total) : [];
+  const realistic = Calc.isTimeRealistic(raceId, total);
+  const preds = total > 0 && realistic ? Calc.predictAll(race.meters, total) : [];
   return (
     <div className="grid-12">
       <div className="card col-4">
@@ -345,6 +367,7 @@ function ToolPredict({ units }) {
       </div>
       <div className="card col-8">
         <div className="card-label">Predicted finishes</div>
+        {total > 0 && !realistic && <UnrealisticNotice raceName={race.name} />}
         <div className="predict-table">
           {preds.map((p) => {
             const distance = units === 'km' ? p.meters / 1000 : Calc.kmToMi(p.meters / 1000);
@@ -444,7 +467,7 @@ function ToolCalorie({ units }) {
         </div>
       </div>
       <div className="card solid col-6">
-        <div className="card-label">Calories burned</div>
+        <div className="card-label">Estimated calories burned</div>
         <div className="big-number" style={{ fontSize: 88 }}>
           {cal ? cal.average : 0}
           <span className="unit">KCAL</span>
@@ -476,11 +499,15 @@ function ToolCalorie({ units }) {
 
 function ToolVDOT() {
   const [raceId, setRaceId] = useState('5k');
-  const [t, setT] = useState({ h: 0, m: 22, s: 0 });
+  const [t, setT] = useState(Calc.DEFAULT_TIMES['5k']);
+  useEffect(() => {
+    setT(Calc.DEFAULT_TIMES[raceId] || { h: 0, m: 0, s: 0 });
+  }, [raceId]);
   const race = Calc.RACES.find((r) => r.id === raceId);
   const total = Calc.parseTime(t.h, t.m, t.s);
-  const vdot = total > 0 ? Calc.vdotFromRace(race.meters, total) : 0;
-  const vo2 = total > 0 ? Calc.vo2Max(race.meters, total) : 0;
+  const realistic = Calc.isTimeRealistic(raceId, total);
+  const vdot = total > 0 && realistic ? Calc.vdotFromRace(race.meters, total) : 0;
+  const vo2 = total > 0 && realistic ? Calc.vo2Max(race.meters, total) : 0;
   return (
     <div className="grid-12">
       <div className="card col-5">
@@ -527,6 +554,7 @@ function ToolVDOT() {
       </div>
       <div className="card solid col-7">
         <div className="card-label">Result</div>
+        {total > 0 && !realistic && <UnrealisticNotice raceName={race.name} />}
         <div className="big-number">{vdot ? vdot.toFixed(1) : '—'}</div>
         <div
           style={{

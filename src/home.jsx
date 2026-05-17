@@ -1,6 +1,6 @@
 // Home: goal-driven workspace + results dashboard.
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Calc } from './lib/calc.js';
 
 function TimeInput({ value, onChange, includeHours = true }) {
@@ -46,14 +46,32 @@ function TimeInput({ value, onChange, includeHours = true }) {
 
 export function Workspace({ onCompute }) {
   const [raceId, setRaceId] = useState('10k');
-  const [time, setTime] = useState({ h: 0, m: 45, s: 0 });
+  const [time, setTime] = useState(Calc.DEFAULT_TIMES['10k']);
   const [maxHR, setMaxHR] = useState(185);
   const [weight, setWeight] = useState(70);
+  const [error, setError] = useState(null);
+
+  // Reset to a realistic default whenever the race distance changes so a
+  // user clicking from 10K to Marathon doesn't keep the 58-min default.
+  useEffect(() => {
+    setTime(Calc.DEFAULT_TIMES[raceId] || { h: 0, m: 0, s: 0 });
+    setError(null);
+  }, [raceId]);
 
   const submit = () => {
     const race = Calc.RACES.find((r) => r.id === raceId);
     const total = Calc.parseTime(time.h, time.m, time.s);
-    if (total <= 0) return;
+    if (total <= 0) {
+      setError('Enter a time greater than zero.');
+      return;
+    }
+    if (!Calc.isTimeRealistic(raceId, total)) {
+      setError(
+        `That's faster than the world record for ${race.name}. Try a more realistic time.`
+      );
+      return;
+    }
+    setError(null);
     onCompute({
       race,
       totalSeconds: total,
@@ -86,6 +104,24 @@ export function Workspace({ onCompute }) {
             <span className="arrow">→</span>
           </button>
         </div>
+
+        {error && (
+          <div
+            role="alert"
+            style={{
+              marginTop: 14,
+              padding: '10px 14px',
+              background: 'var(--accent-soft)',
+              color: 'var(--accent-ink)',
+              border: '1px solid var(--accent-line)',
+              borderRadius: 10,
+              fontSize: 13,
+              fontFamily: 'var(--sans)',
+            }}
+          >
+            {error}
+          </div>
+        )}
 
         <div style={{ display: 'flex', gap: 20, marginTop: 22, flexWrap: 'wrap' }}>
           <details style={{ flex: 1, minWidth: 280 }}>
@@ -543,7 +579,7 @@ export function Dashboard({ result, units }) {
           <Splits totalSeconds={totalSeconds} race={race} units={units} />
           <HRZonesCard maxHR={maxHR} />
           <div className="card col-6">
-            <div className="card-label">Calories burned</div>
+            <div className="card-label">Estimated calories burned</div>
             <div className="big-number" style={{ fontSize: 72 }}>
               {cal.average}
               <span className="unit">KCAL</span>

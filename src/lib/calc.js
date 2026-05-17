@@ -164,6 +164,38 @@ export const RACES = [
   { id: 'marathon', name: 'Marathon', meters: 42195 },
 ];
 
+// Reasonable defaults for an average recreational runner per distance,
+// expressed as { h, m, s } so they drop straight into the time-segment input.
+export const DEFAULT_TIMES = {
+  '1mile': { h: 0, m: 7, s: 0 },
+  '5k': { h: 0, m: 28, s: 0 },
+  '10k': { h: 0, m: 58, s: 0 },
+  half: { h: 2, m: 0, s: 0 },
+  marathon: { h: 4, m: 15, s: 0 },
+};
+
+// Minimum allowed finish time per distance, derived from men's world records
+// minus ~10% (i.e. WR × 0.9). Anything faster than this is treated as
+// unrealistic user input and blocked at submit.
+//   1 mile: 3:43.13 (El Guerrouj 1999)
+//   5K: 12:35.36 (Cheptegei 2020)
+//   10K: 26:11.00 (Cheptegei 2020)
+//   Half: 57:30 (Kejelcha 2024)
+//   Marathon: 2:00:35 (Kiptum 2023)
+export const MIN_SECONDS = {
+  '1mile': Math.round(223.13 * 0.9),
+  '5k': Math.round(755.36 * 0.9),
+  '10k': Math.round(1571 * 0.9),
+  half: Math.round(3450 * 0.9),
+  marathon: Math.round(7235 * 0.9),
+};
+
+export function isTimeRealistic(raceId, totalSeconds) {
+  const min = MIN_SECONDS[raceId];
+  if (min == null) return totalSeconds > 0;
+  return totalSeconds >= min;
+}
+
 export const Calc = {
   fmtPace,
   fmtTime,
@@ -182,4 +214,7 @@ export const Calc = {
   miToKm,
   pacePerKmToPerMi,
   RACES,
+  DEFAULT_TIMES,
+  MIN_SECONDS,
+  isTimeRealistic,
 };

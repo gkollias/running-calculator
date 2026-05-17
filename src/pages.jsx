@@ -4,14 +4,15 @@ import React, { useState } from 'react';
 import { Calc } from './lib/calc.js';
 
 export function MarathonPage({ units }) {
-  const [goal, setGoal] = useState({ h: 3, m: 30, s: 0 });
+  const [goal, setGoal] = useState(Calc.DEFAULT_TIMES.marathon);
   const total = Calc.parseTime(goal.h, goal.m, goal.s);
   const race = { id: 'marathon', name: 'Marathon', meters: 42195 };
   const distanceKm = race.meters / 1000;
-  const paceSec = total > 0 ? total / distanceKm : 0;
+  const realistic = Calc.isTimeRealistic('marathon', total);
+  const paceSec = total > 0 && realistic ? total / distanceKm : 0;
   const paceShow = units === 'km' ? paceSec : Calc.pacePerKmToPerMi(paceSec);
-  const vdot = total > 0 ? Calc.vdotFromRace(race.meters, total) : 0;
-  const items = total > 0 ? Calc.splits(paceSec, distanceKm) : [];
+  const vdot = total > 0 && realistic ? Calc.vdotFromRace(race.meters, total) : 0;
+  const items = total > 0 && realistic ? Calc.splits(paceSec, distanceKm) : [];
 
   const display = items.filter(
     (x) =>
@@ -115,6 +116,22 @@ export function MarathonPage({ units }) {
               </div>
             </div>
           </div>
+          {total > 0 && !realistic && (
+            <div
+              role="alert"
+              style={{
+                marginTop: 14,
+                padding: '10px 14px',
+                background: 'var(--accent-soft)',
+                color: 'var(--accent-ink)',
+                border: '1px solid var(--accent-line)',
+                borderRadius: 10,
+                fontSize: 13,
+              }}
+            >
+              That's faster than the marathon world record. Enter a more realistic goal time.
+            </div>
+          )}
         </div>
       </section>
 
