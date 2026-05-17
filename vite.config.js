@@ -1,8 +1,13 @@
+/// <reference types="vitest" />
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
+  test: {
+    // Playwright specs live under e2e/ and use @playwright/test, not vitest.
+    exclude: ['node_modules', 'dist', '.git', '.vite', 'e2e/**', 'playwright-report/**'],
+  },
   plugins: [
     react(),
     VitePWA({

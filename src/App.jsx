@@ -284,9 +284,10 @@ function HomePage({ units }) {
             Plan the <em>race</em>.
           </h1>
           <p className="lede">
-            One workspace, every calculator. Enter a recent race or a goal time —
-            we'll calculate your VDOT, training paces, splits, heart-rate zones,
-            and predictions in one shot.
+            The free running pace calculator runners use to plan training and
+            race day — VDOT, race-pace splits, heart-rate zones, calorie
+            estimates, and race time predictions. Enter a recent race or a goal
+            time and get the full picture in one shot.
           </p>
         </div>
       </section>

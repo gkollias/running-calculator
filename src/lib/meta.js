@@ -10,37 +10,39 @@ const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/og-image.png`;
 
 export const ROUTE_META = {
   home: {
-    title: 'PACE. — Running calculators for the curious',
+    title: 'Running Pace Calculator — VDOT, Splits & Race Times | PACE.',
     description:
-      'Pace, splits, VDOT, heart-rate zones, calories, and race predictions in one workspace. Free, science-backed running tools.',
+      'Free running pace calculator: convert pace, time, and distance. Compute VDOT, training paces, race splits, heart-rate zones, calories, and race predictions in one tool.',
     path: '/',
   },
   marathon: {
-    title: 'Marathon pacing strategy — PACE.',
+    title: 'Marathon Pace Calculator & Pacing Strategy | PACE.',
     description:
-      'Plan your marathon: required pace, every-5K splits, negative-split strategy, and how your goal compares to common benchmarks.',
+      'Plan your marathon pace, get every-5K splits, see the required pace for any goal time, and benchmark your target. Free marathon pace calculator with negative-split strategy.',
     path: '/#/marathon',
   },
   vo2: {
-    title: 'VO₂ Max estimator — PACE.',
+    title: 'VO₂ Max Calculator from Race Performance | PACE.',
     description:
-      'Estimate your VO₂ max from a recent race using Daniels\' formula. See how you compare to the age-graded reference.',
+      'Estimate your VO₂ max from a 5K, 10K, half, or marathon time. Free VO₂ max calculator using Daniels\' formula, with age-graded reference values.',
     path: '/#/vo2',
   },
   guide: {
-    title: 'Training guide — VDOT, pace zones, Riegel — PACE.',
+    title: 'Running Training Guide — VDOT, Pace Zones & Riegel | PACE.',
     description:
-      'Plain-language explanations of the formulas behind every calculator: VDOT, Riegel race prediction, Karvonen HR zones, MET energy expenditure.',
+      'How VDOT, Riegel race predictions, Karvonen heart-rate zones, and the 80/20 training rule work. The science behind every running calculator, explained.',
     path: '/#/guide',
   },
   contact: {
-    title: 'Contact — PACE.',
-    description: 'Bug report, feature request, or just say hi. Every message read by a human.',
+    title: 'Contact PACE. — Free Running Calculators',
+    description:
+      'Bug report, feature request, or feedback on the free running pace, VDOT, splits, heart-rate, and race-prediction calculators.',
     path: '/#/contact',
   },
   notfound: {
-    title: 'Not found — PACE.',
-    description: 'The page you were looking for does not exist.',
+    title: 'Page Not Found | PACE. Running Pace Calculator',
+    description:
+      'The page you were looking for does not exist. Back to the free pace, VDOT, splits, and race-prediction calculators.',
     path: '/',
   },
 };
