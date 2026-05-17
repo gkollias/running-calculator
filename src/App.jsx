@@ -290,17 +290,9 @@ function HomePage({ units }) {
         </div>
       </section>
 
-      <section style={{ padding: '64px 0' }}>
-        <div className="shell">
-          <div className="sponsor">
-            <span className="label">Sponsored</span>
-            <span className="slot">
-              Ad slot · 728 × 90 · runner-relevant placements only
-            </span>
-            <span className="label">why ads?</span>
-          </div>
-        </div>
-      </section>
+      {/* AdSense Auto Ads inject themselves based on the script tag in index.html.
+          For explicit placement, drop in <ins class="adsbygoogle"> blocks with
+          your specific data-ad-slot ID. */}
     </main>
   );
 }
