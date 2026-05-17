@@ -243,7 +243,7 @@ function HomePage({ units }) {
     <main>
       <section className="hero">
         <div className="shell">
-          <div className="kicker">Free running tools · science-backed</div>
+          <div className="kicker">Running tools for the curious</div>
           <h1>
             Find your <em>pace</em>.<br />
             Plan the <em>race</em>.
