@@ -12,6 +12,7 @@ import {
   TweakRadio,
   TweakColor,
 } from './tweaks.jsx';
+import { useDocumentMeta } from './lib/meta.js';
 
 const TWEAK_DEFAULTS = {
   accent: 'coral',
@@ -392,7 +393,10 @@ export default function App() {
     applyAccent(typeof tweaks.accent === 'string' ? tweaks.accent : 'coral');
   }, [tweaks.accent]);
 
+  const knownRoutes = ['home', 'marathon', 'vo2', 'guide', 'contact'];
   const routePath = route.path === 'results' ? 'home' : route.path;
+  const metaKey = knownRoutes.includes(routePath) ? routePath : 'notfound';
+  useDocumentMeta(metaKey);
 
   return (
     <>
