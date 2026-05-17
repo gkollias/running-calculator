@@ -13,6 +13,7 @@ import {
   TweakColor,
 } from './tweaks.jsx';
 import { useDocumentMeta } from './lib/meta.js';
+import { useCalcHistory } from './lib/history.js';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 
@@ -234,6 +235,8 @@ function Nav({ route, navigate, units, setUnits, theme, setTheme }) {
 
 function HomePage({ units }) {
   const [result, setResult] = useState(null);
+  const { history, addEntry, clearHistory } = useCalcHistory();
+
   useEffect(() => {
     const { path, params } = parseHash(window.location.hash);
     if (path === 'results' && params.race && params.t) {
@@ -247,6 +250,29 @@ function HomePage({ units }) {
         });
     }
   }, []);
+
+  const onCompute = (r) => {
+    setResult(r);
+    addEntry({
+      raceId: r.race.id,
+      raceName: r.race.name,
+      totalSeconds: r.totalSeconds,
+      vdot: Calc.vdotFromRace(r.race.meters, r.totalSeconds),
+      maxHR: r.maxHR,
+      weight: r.weight,
+    });
+  };
+
+  const restoreEntry = (entry) => {
+    const race = Calc.RACES.find((r) => r.id === entry.raceId);
+    if (!race) return;
+    setResult({
+      race,
+      totalSeconds: entry.totalSeconds,
+      maxHR: entry.maxHR,
+      weight: entry.weight,
+    });
+  };
 
   return (
     <main>
@@ -265,7 +291,36 @@ function HomePage({ units }) {
         </div>
       </section>
 
-      <Workspace onCompute={setResult} />
+      {history.length > 0 && (
+        <section className="history-strip">
+          <div className="shell">
+            <div className="history-head">
+              <span className="history-label">Recent</span>
+              <button className="history-clear" onClick={clearHistory}>
+                Clear
+              </button>
+            </div>
+            <div className="history-chips">
+              {history.map((e) => (
+                <button
+                  key={`${e.raceId}-${e.totalSeconds}`}
+                  className="history-chip"
+                  onClick={() => restoreEntry(e)}
+                  title={`Restore ${e.raceName} in ${Calc.fmtTime(e.totalSeconds)}`}
+                >
+                  <span className="hc-race">{e.raceName}</span>
+                  <span className="hc-sep">·</span>
+                  <span className="hc-time">{Calc.fmtTime(e.totalSeconds)}</span>
+                  <span className="hc-sep">·</span>
+                  <span className="hc-vdot">VDOT {e.vdot.toFixed(1)}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <Workspace onCompute={onCompute} />
 
       {result && <Dashboard result={result} units={units} />}
 

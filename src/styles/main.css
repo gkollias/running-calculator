@@ -807,6 +807,58 @@ input, select, textarea { font-family: inherit; color: inherit; }
   .racecard { max-width: 100%; border: 2px solid black; }
 }
 
+/* =========================================================
+   calculation history strip
+   ========================================================= */
+.history-strip {
+  padding: 24px 0 0;
+}
+.history-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 10px;
+}
+.history-label {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+}
+.history-clear {
+  background: transparent; border: 0; color: var(--muted); cursor: pointer;
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 6px;
+  border-radius: 6px; transition: color .15s, background .15s;
+}
+.history-clear:hover { color: var(--ink); background: var(--paper-2); }
+.history-chips {
+  display: flex; gap: 8px; overflow-x: auto;
+  scrollbar-width: thin; padding-bottom: 4px;
+}
+.history-chip {
+  flex: none;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 14px;
+  display: inline-flex; align-items: baseline; gap: 8px;
+  font-size: 13px;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+  white-space: nowrap;
+}
+.history-chip:hover { background: var(--paper-3); border-color: var(--line-2); }
+.history-chip .hc-race {
+  font-family: var(--display);
+  font-size: 16px;
+  letter-spacing: -0.01em;
+}
+.history-chip .hc-sep { color: var(--muted-2); }
+.history-chip .hc-time, .history-chip .hc-vdot {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+}
+.history-chip .hc-vdot { color: var(--muted); }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
