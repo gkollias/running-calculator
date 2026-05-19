@@ -3,3 +3,4 @@ Allow: /
 Disallow: /legacy/
 
 Sitemap: https://www.runningpacecalculator.fit/sitemap.xml
+Sitemap: https://www.runningpacecalculator.fit/sitemap_index.xml

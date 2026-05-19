@@ -24,13 +24,13 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!api/|_next/|assets/|favicon\\.svg|robots\\.txt|sitemap\\.xml|ads\\.txt|manifest\\.webmanifest|registerSW\\.js|sw\\.js|workbox-.*|og-image\\.png|apple-touch-icon\\.png).*)",
+      "source": "/((?!api/|_next/|assets/|favicon\\.svg|robots\\.txt|sitemap.*\\.xml|ads\\.txt|manifest\\.webmanifest|registerSW\\.js|sw\\.js|workbox-.*|og-image\\.png|apple-touch-icon\\.png).*)",
       "destination": "/"
     }
   ],
   "headers": [
     {
-      "source": "/sitemap.xml",
+      "source": "/(sitemap.*\\.xml|sitemap_index\\.xml)",
       "headers": [
         { "key": "Content-Type", "value": "application/xml; charset=utf-8" },
         { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=3600" },
