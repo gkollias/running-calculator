@@ -10,7 +10,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "og:gen": "node scripts/generate-og.mjs"
+    "og:gen": "node scripts/generate-og.mjs",
+    "favicons:gen": "node scripts/generate-favicons.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",

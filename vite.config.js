@@ -12,10 +12,18 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'robots.txt', 'sitemap.xml', 'ads.txt'],
-      // TODO: replace icon entries with PNG (192/512 + maskable) when assets
-      // are generated. SVG works in most modern browsers; iOS prefers PNG
-      // apple-touch-icon for the homescreen install icon.
+      includeAssets: [
+        'favicon.svg',
+        'favicon-16x16.png',
+        'favicon-32x32.png',
+        'apple-touch-icon.png',
+        'robots.txt',
+        'sitemap.xml',
+        'sitemap-pages.xml',
+        'sitemap_index.xml',
+        'ads.txt',
+        'og-image.png',
+      ],
       manifest: {
         name: 'PACE. — Running tools for the curious',
         short_name: 'PACE.',
@@ -33,6 +41,24 @@ export default defineConfig({
             sizes: 'any',
             type: 'image/svg+xml',
             purpose: 'any',
+          },
+          {
+            src: '/icon-192.png',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: 'any',
+          },
+          {
+            src: '/icon-512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any',
+          },
+          {
+            src: '/icon-512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
           },
         ],
       },

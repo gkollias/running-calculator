@@ -24,7 +24,7 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!api/|_next/|assets/|favicon\\.svg|robots\\.txt|sitemap.*\\.xml|ads\\.txt|manifest\\.webmanifest|registerSW\\.js|sw\\.js|workbox-.*|og-image\\.png|apple-touch-icon\\.png).*)",
+      "source": "/((?!api/|_next/|assets/|favicon.*\\.(svg|png|ico)|icon-.*\\.png|robots\\.txt|sitemap.*\\.xml|ads\\.txt|manifest\\.webmanifest|registerSW\\.js|sw\\.js|workbox-.*|og-image\\.png|apple-touch-icon\\.png).*)",
       "destination": "/"
     }
   ],
